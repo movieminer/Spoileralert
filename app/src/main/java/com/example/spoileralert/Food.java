@@ -19,7 +19,6 @@ public class Food {
     private Date spoil;
     private String URL = "https://www.food2fork.com/api/search?key=18e03eaa954ff60c4589c9766e5825b1";
 
-
     public Food(int quantity, String name, Date spoil) {
         this.name = name;
         this.quantity = quantity;

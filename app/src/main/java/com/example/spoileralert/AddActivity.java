@@ -21,6 +21,8 @@ import java.util.List;
 
 public class AddActivity extends AppCompatActivity {
 
+    private String name= "state";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +31,8 @@ public class AddActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_food);
 
         Spinner spinner1 = findViewById(R.id.spinner1);
+
+
 
 
         String[] list = {"Meat", "Vegetables","Liquids", "Breakfast"};
@@ -79,15 +83,28 @@ public class AddActivity extends AppCompatActivity {
 
     public void openActivityADD() {
         Intent intent = new Intent(this, Add_2_Activity.class);
+        intent.putExtra("name", name);
         startActivity(intent);
     }
 
     public void setSpinner2(String[] arr){
 
-        Spinner spinner2 = findViewById(R.id.spinner2);
+        final Spinner spinner2 = findViewById(R.id.spinner2);
         ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(this,
                 R.layout.spinner_layout, arr);
         dataAdapter2.setDropDownViewResource(R.layout.spinner_layout);
         spinner2.setAdapter(dataAdapter2);
+        spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                name=spinner2.getSelectedItem().toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 }
