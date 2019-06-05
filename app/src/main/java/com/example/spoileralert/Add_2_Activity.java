@@ -2,28 +2,25 @@ package com.example.spoileralert;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.InputType;
+import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 public class Add_2_Activity extends AppCompatActivity {
 
-    final Calendar myCalendar = Calendar.getInstance();
-    DatePickerDialog.OnDateSetListener date;
-    DatePickerDialog picker;
-    private Context context;
+    private Context context = this;
+    private Calendar cldr;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,32 +35,43 @@ public class Add_2_Activity extends AppCompatActivity {
 
         Integer[] list = {100, 200,300, 400, 500, 600, 700, 800, 900, 1000, 1500};
 
-
         ArrayAdapter<Integer> dataAdapter = new ArrayAdapter<>(this, R.layout.spinner_layout, list);
         dataAdapter.setDropDownViewResource(R.layout.spinner_layout);
         spinner1.setAdapter(dataAdapter);
 
-        final TextView text = findViewById(R.id.textView);
+        TextView text = findViewById(R.id.expireDate);
 
-        text.setInputType(InputType.TYPE_NULL);
+        //text.setInputType(InputType.TYPE_NULL);
+        cldr = Calendar.getInstance();
+
+               // date picker dialog
+        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                cldr.set(Calendar.YEAR, year);
+                cldr.set(Calendar.MONTH, monthOfYear);
+                cldr.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateLabel();
+            }
+        };
+
         text.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                final Calendar cldr = Calendar.getInstance();
-                int day = cldr.get(Calendar.DAY_OF_MONTH);
-                int month = cldr.get(Calendar.MONTH);
-                int year = cldr.get(Calendar.YEAR);
-                // date picker dialog
-                picker = new DatePickerDialog(context,
-                        new DatePickerDialog.OnDateSetListener() {
-                            @Override
-                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                                text.setText(String.format("%d/%d/%d", dayOfMonth, monthOfYear + 1, year));
-                            }
-                        }, year, month, day);
-                picker.show();
+                // TODO Auto-generated method stub
+                new DatePickerDialog(context, date, cldr
+                        .get(Calendar.YEAR), cldr.get(Calendar.MONTH),
+                        cldr.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
+        }
 
+    private void updateLabel() {
+        TextView text = findViewById(R.id.expireDate);
+        String myFormat = "dd-MM-yy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.getDefault());
+
+        text.setText(sdf.format(cldr.getTime()));
     }
 }
