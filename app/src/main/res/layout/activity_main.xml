@@ -13,7 +13,6 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="40dp"
         android:clickable="true"
-        android:tint="#FFFFFF"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,7 +36,6 @@
         android:layout_marginStart="48dp"
         android:layout_marginBottom="40dp"
         android:clickable="true"
-        android:tint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/add_button"
         app:srcCompat="@android:drawable/ic_menu_preferences" />
