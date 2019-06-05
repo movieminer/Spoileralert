@@ -85,7 +85,7 @@ public class Add_2_Activity extends AppCompatActivity {
 
     private void updateLabel() {
         TextView text = findViewById(R.id.expireDate);
-        String myFormat = "dd-MM-yy"; //In which you need put here
+        String myFormat = "dd-MM-yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.getDefault());
 
         text.setText(sdf.format(cldr.getTime()));
