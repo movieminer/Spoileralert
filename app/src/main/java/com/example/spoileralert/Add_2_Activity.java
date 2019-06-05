@@ -2,6 +2,7 @@ package com.example.spoileralert;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
@@ -65,7 +66,22 @@ public class Add_2_Activity extends AppCompatActivity {
                         cldr.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
-        }
+
+        //add_button.setOnClickListener(new View.OnClickListener() {
+          //  @Override
+            //public void onClick(View v) {
+              //  openActivityADD();
+            //}
+        //});
+    }
+
+    public void openActivityADD() {
+        Intent intent = new Intent(this, Add_2_Activity.class);
+        //intent.putExtra("date", name);
+       // intent.putExtra("quantity", )
+        startActivity(intent);
+    }
+
 
     private void updateLabel() {
         TextView text = findViewById(R.id.expireDate);
