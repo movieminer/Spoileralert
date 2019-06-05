@@ -28,7 +28,7 @@ public class AddActivity extends AppCompatActivity {
 
 
 
-        String[] list = {"Meat", "Vegetables","Liquids", "Breakfast"};
+        String[] list = {"Meat", "Vegetables", "Liquids", "Dairy/Eggs" };
 
 
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, R.layout.spinner_layout, list);
@@ -37,10 +37,10 @@ public class AddActivity extends AppCompatActivity {
 
         spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
-            String[] Meat = {"Cow", "Pork", "Chicken", "Fish"};
-            String[] Vegetables = {"Lettuce", "Broccoli", "Paprika", "Cucumber"};
-            String[] Liquids = {"Milk", "Yoghurt", "Orange juice"};
-            String[] Breakfast = {"Eggs", "Cheese", "Butter?"};
+            String[] Meat = {"Beef", "Chicken", "Fish", "Pork"};
+            String[] Vegetables = {"Broccoli", "Cucumber", "Lettuce", "Paprika"};
+            String[] Liquids = {"Alcoholic Drink", "Breakfast Drink", "Fizzy Drink", "Fruit Juice",};
+            String[] DairyEggs = { "Butter", "Cheese", "Custard", "Eggs", "Whipped Cream", "Yogurt"};
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -54,7 +54,7 @@ public class AddActivity extends AppCompatActivity {
                     setSpinner2(Liquids);
                 }
                 else if(position==3){
-                    setSpinner2(Breakfast);
+                    setSpinner2(DairyEggs);
                 }
             }
 
