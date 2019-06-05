@@ -9,17 +9,17 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.Random;
 
 public class Food {
 
     private int quantity;
     private String name;
-    private Date spoil;
+    private Calendar spoil;
     private String URL = "https://www.food2fork.com/api/search?key=18e03eaa954ff60c4589c9766e5825b1";
 
-    public Food(int quantity, String name, Date spoil) {
+    public Food(int quantity, String name, Calendar spoil) {
         this.name = name;
         this.quantity = quantity;
         this.spoil = spoil;
@@ -52,11 +52,15 @@ public class Food {
         return null;
     }
 
+    public boolean spoilsToday(Calendar currentDate){
+        return currentDate.DAY_OF_MONTH == this.spoil.DAY_OF_MONTH && currentDate.MONTH == this.spoil.MONTH && currentDate.YEAR == this.spoil.YEAR;
+    }
+
     public String getName() {
         return name;
     }
 
-    public Date getSpoil() {
+    public Calendar getSpoil() {
         return spoil;
     }
 
