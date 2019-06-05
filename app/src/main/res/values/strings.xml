@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Spoileralert</string>
+    <string name="expdate">Expire date</string>
 </resources>
