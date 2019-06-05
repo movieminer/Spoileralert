@@ -4,13 +4,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringWriter;
-import java.net.HttpURLConnection;
 import java.net.URL;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
+
+import javax.net.ssl.HttpsURLConnection;
 
 public class API {
 
@@ -20,16 +21,6 @@ public class API {
 
     private static String TAG = "API Log";
 
-    public static boolean isOnline(Context ctx)//Checking Internet is available or not
-    {
-    ConnectivityManager connMgr = (ConnectivityManager) ctx
-            .getSystemService(Context.CONNECTIVITY_SERVICE);
-    NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-		if(networkInfo != null && networkInfo.isConnected())
-            return true;
-		else
-                return false;
-    }
 
     // Given a URL, establishes an HttpUrlConnection and retrieves
     // the web page content as a InputStream, which it returns as
@@ -38,7 +29,7 @@ public class API {
         InputStream is = null;
         try {
             URL url = new URL(myurl);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
             conn.setReadTimeout(10000); // time in milliseconds
             conn.setConnectTimeout(15000); // time in milliseconds
             conn.setRequestMethod("GET"); // request method GET OR POST
