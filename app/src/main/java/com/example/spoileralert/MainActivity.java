@@ -38,6 +38,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        FloatingActionButton setting_button = findViewById(R.id.setting_button);
+        setting_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openActivitySet();
+            }
+        });
+
         try {
             start();
         } catch (ParseException e) {
@@ -48,6 +56,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void openActivityADD() {
         Intent intent = new Intent(this, AddActivity.class);
+        startActivity(intent);
+    }
+    public void openActivitySet() {
+        Intent intent = new Intent(this, SettingActivity.class);
         startActivity(intent);
     }
 
