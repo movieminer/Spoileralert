@@ -5,20 +5,12 @@ import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.Spinner;
-
-import java.lang.reflect.Array;
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class AddActivity extends AppCompatActivity {
 
@@ -81,7 +73,6 @@ public class AddActivity extends AppCompatActivity {
             }
         });
 }
-
     public void openActivityADD() {
         Intent intent = new Intent(this, Add_2_Activity.class);
         intent.putExtra("name", name);
