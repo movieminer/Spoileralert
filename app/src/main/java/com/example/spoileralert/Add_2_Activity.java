@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -86,11 +87,15 @@ public class Add_2_Activity extends AppCompatActivity {
     }
 
     public void openActivityADD() {
-        Intent intent = new Intent(this, Add_3_Activity.class);
-        intent.putExtra("name", name);
-        intent.putExtra("date", date);
-        intent.putExtra("quantity", quantity);
-        startActivity(intent);
+        if(date == null)
+            Toast.makeText(context, "Invalid date", Toast.LENGTH_LONG).show();
+        else {
+            Intent intent = new Intent(this, Add_3_Activity.class);
+            intent.putExtra("name", name);
+            intent.putExtra("date", date);
+            intent.putExtra("quantity", quantity);
+            startActivity(intent);
+        }
     }
 
 
