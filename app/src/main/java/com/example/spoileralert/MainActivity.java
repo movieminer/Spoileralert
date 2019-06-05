@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.TextView;
 
 
 import java.text.ParseException;
@@ -51,7 +52,14 @@ public class MainActivity extends AppCompatActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-    }
+
+        SettingActivity settingActivity = new SettingActivity();
+
+        settingActivity.loadData();
+        settingActivity.updateViews();
+        }
+
+
 
 
     public void openActivityADD() {

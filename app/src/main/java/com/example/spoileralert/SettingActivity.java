@@ -28,8 +28,8 @@ public class SettingActivity extends AppCompatActivity {
     public static final String TEXT = "text";
     public static final String SWITCH = "switch";
 
-    private String time;
-    private boolean switchOnOff;
+    public static String time;
+    public static boolean switchOnOff;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
