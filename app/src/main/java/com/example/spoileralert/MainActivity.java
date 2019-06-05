@@ -13,9 +13,12 @@ import android.widget.Button;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedList;
 
 
 public class MainActivity extends AppCompatActivity {
+
+    private static LinkedList<Food> food_list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         FloatingActionButton add_button = findViewById(R.id.add_button);
-
+        food_list = new LinkedList<>();
         add_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,10 +48,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void start() throws ParseException {
-        Food test;
-        test = new Food(600, "chicken", new SimpleDateFormat("dd/MM/yyyy").parse("12/05/2015"));
+        //Food test;
+        //test = new Food(600, "chicken", new SimpleDateFormat("dd/MM/yyyy").parse("12/05/2015"));
 
-        String s = test.getThread();
-        Log.d("API", s);
+       // String s = test.getThread();
+        //Log.d("API", s);
+    }
+    public static void add_food(Food f){
+            food_list.add(f);
     }
 }
