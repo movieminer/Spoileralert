@@ -54,4 +54,83 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/fridge" />
 
+    <ImageView
+        android:id="@+id/imageProduct00"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="85dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/dairy" />
+
+    <TextView
+        android:id="@+id/textProduct00"
+        android:layout_width="64dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:text="testtesxt"
+        app:layout_constraintBottom_toTopOf="@+id/imageProduct00"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageProduct01"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="85dp"
+        app:layout_constraintStart_toEndOf="@+id/imageProduct00"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/dairy" />
+
+    <TextView
+        android:id="@+id/textProduct01"
+        android:layout_width="64dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="testtesxt"
+        app:layout_constraintBottom_toTopOf="@+id/imageProduct01"
+        app:layout_constraintStart_toEndOf="@+id/textProduct00" />
+
+    <ImageView
+        android:id="@+id/imageProduct02"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="85dp"
+        app:layout_constraintStart_toEndOf="@+id/imageProduct01"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/dairy" />
+
+    <TextView
+        android:id="@+id/textProduct02"
+        android:layout_width="64dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="testtesxt"
+        app:layout_constraintBottom_toTopOf="@+id/imageProduct02"
+        app:layout_constraintStart_toEndOf="@+id/textProduct01" />
+
+    <ImageView
+        android:id="@+id/imageProduct03"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="85dp"
+        android:layout_marginEnd="45dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageProduct02"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/dairy" />
+
+    <TextView
+        android:id="@+id/textProduct03"
+        android:layout_width="64dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="45dp"
+        android:text="testtesxt"
+        app:layout_constraintBottom_toTopOf="@+id/imageProduct03"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textProduct02" />
 </android.support.constraint.ConstraintLayout>
