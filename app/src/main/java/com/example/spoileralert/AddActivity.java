@@ -77,6 +77,7 @@ public class AddActivity extends AppCompatActivity {
         Intent intent = new Intent(this, Add_2_Activity.class);
         intent.putExtra("name", name);
         startActivity(intent);
+
     }
 
     public void setSpinner2(String[] arr){

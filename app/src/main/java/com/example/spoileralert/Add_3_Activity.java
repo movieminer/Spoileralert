@@ -53,7 +53,9 @@ public class Add_3_Activity extends AppCompatActivity {
 
         MainActivity.add_food(new Food(Integer.parseInt(getIntent().getStringExtra("quantity")), getIntent().getStringExtra("name"), cal));
         Intent intent = new Intent(this, MainActivity.class);
+
         startActivity(intent);
+        finishAffinity();
     }
 
 }
