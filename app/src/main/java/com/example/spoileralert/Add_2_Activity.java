@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
@@ -16,12 +17,16 @@ import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 public class Add_2_Activity extends AppCompatActivity {
 
     private Context context = this;
     private Calendar cldr;
+    private String date;
+    private String quantity;
+    private String name;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,8 +35,9 @@ public class Add_2_Activity extends AppCompatActivity {
 
         setContentView(R.layout.activity_add_food_2);
 
+        name = getIntent().getStringExtra("name");
 
-        Spinner spinner1 = findViewById(R.id.spinner1);
+        final Spinner spinner1 = findViewById(R.id.spinner1);
 
 
         Integer[] list = {100, 200,300, 400, 500, 600, 700, 800, 900, 1000, 1500};
@@ -41,6 +47,7 @@ public class Add_2_Activity extends AppCompatActivity {
         spinner1.setAdapter(dataAdapter);
 
         TextView text = findViewById(R.id.expireDate);
+
 
         //text.setInputType(InputType.TYPE_NULL);
         cldr = Calendar.getInstance();
@@ -67,18 +74,22 @@ public class Add_2_Activity extends AppCompatActivity {
             }
         });
 
-        //add_button.setOnClickListener(new View.OnClickListener() {
-          //  @Override
-            //public void onClick(View v) {
-              //  openActivityADD();
-            //}
-        //});
+        FloatingActionButton add_button = findViewById(R.id.add_button_2);
+
+        add_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                quantity = spinner1.getSelectedItem().toString();
+              openActivityADD();
+            }
+        });
     }
 
     public void openActivityADD() {
-        Intent intent = new Intent(this, Add_2_Activity.class);
-        //intent.putExtra("date", name);
-       // intent.putExtra("quantity", )
+        Intent intent = new Intent(this, Add_3_Activity.class);
+        intent.putExtra("name", name);
+        intent.putExtra("date", date);
+        intent.putExtra("quantity", quantity);
         startActivity(intent);
     }
 
@@ -87,7 +98,7 @@ public class Add_2_Activity extends AppCompatActivity {
         TextView text = findViewById(R.id.expireDate);
         String myFormat = "dd-MM-yy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.getDefault());
-
+        date=sdf.format(cldr.getTime());
         text.setText(sdf.format(cldr.getTime()));
     }
 }

@@ -23,7 +23,6 @@ public class Food {
         this.name = name;
         this.quantity = quantity;
         this.spoil = spoil;
-
     }
 
     public String getThread(){
