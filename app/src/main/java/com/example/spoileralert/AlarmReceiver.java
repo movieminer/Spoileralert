@@ -31,6 +31,7 @@ public class AlarmReceiver extends BroadcastReceiver{
         String contentTitle = SpoilsNotification.spoiledFoodDisplayMessage(MainActivity.getFood_list());
 
         Notification notification = builder.setContentTitle(contentTitle)
+                .setCategory(Notification.CATEGORY_REMINDER)
                 .setVisibility(Notification.VISIBILITY_PUBLIC)
                 .setContentText("Open Spoiler Alert for more information.")
                 .setTicker("New Message From Spoiler Alert!")
@@ -55,6 +56,7 @@ public class AlarmReceiver extends BroadcastReceiver{
             channel.enableLights(true);
             channel.setLockscreenVisibility(1);
             channel.setLightColor(3);
+
 
 
             notificationManager.createNotificationChannel(channel);

@@ -90,13 +90,17 @@ public class Add_2_Activity extends AppCompatActivity {
     public void openActivityADD() {
         if(date == null)
             Toast.makeText(context, "Invalid date", Toast.LENGTH_LONG).show();
-        else {
+
+        else if (cldr.after(Calendar.getInstance())) {
             Intent intent = new Intent(this, Add_3_Activity.class);
             intent.putExtra("name", name);
             intent.putExtra("date", date);
             intent.putExtra("quantity", quantity);
             intent.putExtra("category", category);
             startActivity(intent);
+        }
+        else {
+            Toast.makeText(context, "YO man, this product is already SPOILED!!!", Toast.LENGTH_LONG).show();
         }
     }
 

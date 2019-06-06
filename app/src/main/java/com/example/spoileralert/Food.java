@@ -15,9 +15,9 @@ import java.util.Random;
 public class Food {
 
     private int quantity;
-    private String name;
-    private String category;
-    private Calendar spoil;
+    private final String name;
+    private final String category;
+    private final Calendar spoil;
     private String URL = "https://www.food2fork.com/api/search?key=18e03eaa954ff60c4589c9766e5825b1";
 
     public Food(int quantity, String category, String name, Calendar spoil) {
