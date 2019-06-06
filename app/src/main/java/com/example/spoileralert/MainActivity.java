@@ -7,7 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.TextView;
 
 
 import java.text.ParseException;
@@ -23,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
 
         FloatingActionButton add_button = findViewById(R.id.add_button);
@@ -34,6 +39,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        FloatingActionButton setting_button = findViewById(R.id.setting_button);
+        setting_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openActivitySet();
+            }
+        });
+
         try {
             start();
         } catch (ParseException e) {
@@ -42,8 +55,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+
+
     public void openActivityADD() {
         Intent intent = new Intent(this, AddActivity.class);
+        startActivity(intent);
+    }
+    public void openActivitySet() {
+        Intent intent = new Intent(this, SettingActivity.class);
         startActivity(intent);
     }
 

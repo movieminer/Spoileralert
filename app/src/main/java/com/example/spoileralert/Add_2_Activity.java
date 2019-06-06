@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -32,7 +33,6 @@ public class Add_2_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-
         setContentView(R.layout.activity_add_food_2);
 
         name = getIntent().getStringExtra("name");
@@ -86,17 +86,21 @@ public class Add_2_Activity extends AppCompatActivity {
     }
 
     public void openActivityADD() {
-        Intent intent = new Intent(this, Add_3_Activity.class);
-        intent.putExtra("name", name);
-        intent.putExtra("date", date);
-        intent.putExtra("quantity", quantity);
-        startActivity(intent);
+        if(date == null)
+            Toast.makeText(context, "Invalid date", Toast.LENGTH_LONG).show();
+        else {
+            Intent intent = new Intent(this, Add_3_Activity.class);
+            intent.putExtra("name", name);
+            intent.putExtra("date", date);
+            intent.putExtra("quantity", quantity);
+            startActivity(intent);
+        }
     }
 
 
     private void updateLabel() {
         TextView text = findViewById(R.id.expireDate);
-        String myFormat = "dd-MM-yy"; //In which you need put here
+        String myFormat = "dd-MM-yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.getDefault());
         date=sdf.format(cldr.getTime());
         text.setText(sdf.format(cldr.getTime()));

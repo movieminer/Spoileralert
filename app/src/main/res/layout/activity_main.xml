@@ -5,38 +5,41 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         tools:context=".MainActivity" android:theme="@style/AppTheme">
 
     <android.support.design.widget.FloatingActionButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clickable="true" app:srcCompat="@android:drawable/ic_menu_add"
-            android:onClick=""
-            android:id="@+id/add_button" android:tint="#FFFFFF"
-            android:visibility="visible" android:layout_marginBottom="36dp"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginLeft="80dp" android:layout_marginStart="80dp"
-            app:layout_constraintEnd_toStartOf="@+id/floatingActionButton2" android:layout_marginEnd="30dp"
-            android:layout_marginRight="30dp"/>
+        android:id="@+id/add_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:clickable="true"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/add_plus" />
+
     <android.support.design.widget.FloatingActionButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clickable="true" app:srcCompat="@android:drawable/stat_notify_chat"
-            android:id="@+id/floatingActionButton2" android:tint="#FFFFFF"
-            app:layout_constraintStart_toEndOf="@+id/add_button" android:layout_marginLeft="30dp"
-            android:layout_marginStart="30dp" android:layout_marginBottom="36dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/floatingActionButton3" android:layout_marginEnd="30dp"
-            android:layout_marginRight="30dp"/>
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="40dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/add_button" />
+
     <android.support.design.widget.FloatingActionButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clickable="true" app:srcCompat="@android:drawable/ic_menu_preferences"
-            android:id="@+id/floatingActionButton3" android:tint="#FFFFFF" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="80dp" android:layout_marginRight="80dp"
-            app:layout_constraintStart_toEndOf="@+id/floatingActionButton2" android:layout_marginLeft="30dp"
-            android:layout_marginStart="30dp" android:layout_marginBottom="36dp"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+        android:id="@+id/setting_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginBottom="40dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/add_button"
+        app:srcCompat="@drawable/settings" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -51,4 +54,85 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/fridge" />
+
+    <ImageView
+        android:id="@+id/imageProduct00"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="85dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/dairy" />
+
+    <TextView
+        android:id="@+id/textProduct00"
+        android:layout_width="64dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:text="testtesxt"
+        app:layout_constraintBottom_toTopOf="@+id/imageProduct00"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageProduct01"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="85dp"
+        app:layout_constraintStart_toEndOf="@+id/imageProduct00"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/dairy" />
+
+    <TextView
+        android:id="@+id/textProduct01"
+        android:layout_width="64dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="testtesxt"
+        app:layout_constraintBottom_toTopOf="@+id/imageProduct01"
+        app:layout_constraintStart_toEndOf="@+id/textProduct00" />
+
+    <ImageView
+        android:id="@+id/imageProduct02"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="85dp"
+        app:layout_constraintStart_toEndOf="@+id/imageProduct01"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/dairy" />
+
+    <TextView
+        android:id="@+id/textProduct02"
+        android:layout_width="64dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="testtesxt"
+        app:layout_constraintBottom_toTopOf="@+id/imageProduct02"
+        app:layout_constraintStart_toEndOf="@+id/textProduct01" />
+
+    <ImageView
+        android:id="@+id/imageProduct03"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="85dp"
+        android:layout_marginEnd="45dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageProduct02"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/dairy" />
+
+    <TextView
+        android:id="@+id/textProduct03"
+        android:layout_width="64dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="45dp"
+        android:text="testtesxt"
+        app:layout_constraintBottom_toTopOf="@+id/imageProduct03"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textProduct02" />
+
 </android.support.constraint.ConstraintLayout>
