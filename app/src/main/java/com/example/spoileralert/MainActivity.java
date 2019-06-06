@@ -172,7 +172,6 @@ public class MainActivity extends AppCompatActivity {
             ImageView iv;
             TableRow tr = (TableRow) tl.getChildAt(1);
             iv = (ImageView) tr.getChildAt(i);
-            System.out.println(i);
             frames.add(iv);
         }
         for(int i=0; i<4; i++){
