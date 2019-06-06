@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#a1344b">
+    android:background="#878183">
 
     <View
         android:id="@+id/view"
