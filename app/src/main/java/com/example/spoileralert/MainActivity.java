@@ -26,6 +26,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.LinkedList;
 
@@ -189,37 +191,34 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void show_food(){
+    public void show_food() {
         Calendar cal = Calendar.getInstance();
-        for(int i=0; i<food_list.size(); i++){
-            if(food_list.get(i).getCategory().equals("Meat")){
+        for (int i = 0; i < food_list.size(); i++) {
+            if (food_list.get(i).getCategory().equals("Meat")) {
                 frames.get(i).setImageResource(R.drawable.meat);
                 text.get(i).setText(food_list.get(i).getName());
                 text.get(i).setGravity(Gravity.CENTER);
-            }
-            else if(food_list.get(i).getCategory().equals("Vegetables")){
+            } else if (food_list.get(i).getCategory().equals("Vegetables")) {
                 frames.get(i).setImageResource(R.drawable.vegetables);
                 text.get(i).setText(food_list.get(i).getName());
                 text.get(i).setGravity(Gravity.CENTER);
-            }
-            else if(food_list.get(i).getCategory().equals("Liquids")){
+            } else if (food_list.get(i).getCategory().equals("Liquids")) {
                 frames.get(i).setImageResource(R.drawable.liquids);
                 text.get(i).setText(food_list.get(i).getName());
                 text.get(i).setGravity(Gravity.CENTER);
-            }
-            else{
+            } else {
                 frames.get(i).setImageResource(R.drawable.dairy);
                 text.get(i).setText(food_list.get(i).getName());
                 text.get(i).setGravity(Gravity.CENTER);
             }
 
-            if(food_list.get(i).spoilsToday(cal)){
+            if (food_list.get(i).spoilsToday(cal)) {
                 text.get(i).setTextColor(Color.rgb(226, 29, 29));
-            }else if(food_list.get(i).alreadySpoiled(cal)){
+            } else if (food_list.get(i).alreadySpoiled(cal)) {
                 text.get(i).setTextColor(Color.rgb(255, 255, 0));
             }
         }
-        for(int i=food_list.size(); i<16; i++){
+        for (int i = food_list.size(); i < 16; i++) {
             frames.get(i).setImageResource(R.drawable.empty);
             text.get(i).setText("");
         }
