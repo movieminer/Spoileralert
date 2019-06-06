@@ -1,8 +1,13 @@
 <resources>
-    <string name="app_name">Spoileralert</string>
-    <string name="expdate">Expire date</string>
-    <string name="credits">Spoileralert made by:    Thijs de Jong, Julian van der Horst, Luc Slaats,  Michiel van de Noort  en Jochem Neels     Group 13</string>
+    <string name="app_name">Spoiler Alert</string>
+    <string name="expdate">Expiration Date</string>
+    <string name="credits">Spoileralert made by: Thijs de Jong, Julian van der Horst, Luc Slaats, Michiel van de Noort and Jochem Neels \n \nGroup 13</string>
     <string name="save_settings">Save Settings</string>
     <string name="get_notif">Get Notifications</string>
     <string name="time_of_notif">Time of notification</string>
+    <string name="quantity">Quantity g/ml:</string>
+    <string name="summary">Summary</string>
+    <string name="expire_date">Expiration Date:</string>
+    <string name="product">Product:</string>
+    <string name="quantitySumm">Quantity:</string>
 </resources>
