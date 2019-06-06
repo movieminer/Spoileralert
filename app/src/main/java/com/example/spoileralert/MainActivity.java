@@ -221,22 +221,27 @@ public class MainActivity extends AppCompatActivity {
     public void show_food() {
         Calendar cal = Calendar.getInstance();
         for (int i = 0; i < food_list.size(); i++) {
-            if (food_list.get(i).getCategory().equals("Meat")) {
-                frames.get(i).setImageResource(R.drawable.meat);
-                text.get(i).setText(food_list.get(i).getName());
-                text.get(i).setGravity(Gravity.CENTER);
-            } else if (food_list.get(i).getCategory().equals("Vegetables")) {
-                frames.get(i).setImageResource(R.drawable.vegetables);
-                text.get(i).setText(food_list.get(i).getName());
-                text.get(i).setGravity(Gravity.CENTER);
-            } else if (food_list.get(i).getCategory().equals("Liquids")) {
-                frames.get(i).setImageResource(R.drawable.liquids);
-                text.get(i).setText(food_list.get(i).getName());
-                text.get(i).setGravity(Gravity.CENTER);
-            } else {
-                frames.get(i).setImageResource(R.drawable.dairy);
-                text.get(i).setText(food_list.get(i).getName());
-                text.get(i).setGravity(Gravity.CENTER);
+            switch (food_list.get(i).getCategory()) {
+                case "Meat":
+                    frames.get(i).setImageResource(R.drawable.meat);
+                    text.get(i).setText(food_list.get(i).getName());
+                    text.get(i).setGravity(Gravity.CENTER);
+                    break;
+                case "Vegetables":
+                    frames.get(i).setImageResource(R.drawable.vegetables);
+                    text.get(i).setText(food_list.get(i).getName());
+                    text.get(i).setGravity(Gravity.CENTER);
+                    break;
+                case "Liquids":
+                    frames.get(i).setImageResource(R.drawable.liquids);
+                    text.get(i).setText(food_list.get(i).getName());
+                    text.get(i).setGravity(Gravity.CENTER);
+                    break;
+                default:
+                    frames.get(i).setImageResource(R.drawable.dairy);
+                    text.get(i).setText(food_list.get(i).getName());
+                    text.get(i).setGravity(Gravity.CENTER);
+                    break;
             }
 
             if (food_list.get(i).spoilsToday(cal)) {
