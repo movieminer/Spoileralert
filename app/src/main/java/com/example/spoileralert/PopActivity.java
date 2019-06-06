@@ -53,10 +53,26 @@ public class PopActivity extends AppCompatActivity {
                 openActivityMain();
             }
         });
+
+        FloatingActionButton recipe_button = findViewById(R.id.recipe_button);
+
+        recipe_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openActivityRecipe();
+            }
+        });
+
     }
 
     private void openActivityMain() {
         Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    private void openActivityRecipe() {
+        Intent intent = new Intent(this, PopRecipeActivity.class);
+        intent.putExtra("index", index);
         startActivity(intent);
     }
 }

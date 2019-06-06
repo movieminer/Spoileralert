@@ -1,66 +1,117 @@
 package com.example.spoileralert;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import javax.net.ssl.HttpsURLConnection;
+
+import static android.content.ContentValues.TAG;
 
 public class API {
 
-    public API(){
+    InputStream is = null;
+    JSONObject jObj = null;
+    String json = "";
 
-    }
+    public JSONObject getJSONFromUrl(String url) {
 
-    private static String TAG = "API Log";
-
-
-    // Given a URL, establishes an HttpUrlConnection and retrieves
-    // the web page content as a InputStream, which it returns as
-    // a string.
-    public static String downloadDataFromUrl(String myurl) throws IOException {
-        InputStream is = null;
         try {
-            URL url = new URL(myurl);
-            HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
-            conn.setReadTimeout(10000); // time in milliseconds
-            conn.setConnectTimeout(15000); // time in milliseconds
-            conn.setRequestMethod("GET"); // request method GET OR POST
-            conn.setDoInput(true);
-            // Starts the query
-            conn.connect(); // calling the web address
-            int response = conn.getResponseCode();
-            Log.d(TAG, "The response is: " + response);
-            is = conn.getInputStream();
 
-            // Convert the InputStream into a string
-            String contentAsString = readInputStream(is);
-            return contentAsString;
+            DefaultHttpClient httpClient = new DefaultHttpClient();
+            HttpPost httpPost = new HttpPost(url);
 
-            // Makes sure that the InputStream is closed after the app is
-            // finished using it.
-        } finally {
-            if (is != null) {
-                is.close();
-            }
+            HttpResponse httpResponse = httpClient.execute(httpPost);
+            HttpEntity httpEntity = httpResponse.getEntity();
+            is = httpEntity.getContent();
+
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is, "iso-8859-1"), 8);
+            StringBuilder sb = new StringBuilder();
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                sb.append(line + "\n");
+            }
+            is.close();
+            json = sb.toString();
+
+        } catch (Exception e) {
+            Log.e(TAG, "Error converting result " + e.toString());
+        }
+
+        // try parse the string to a JSON object
+        try {
+            jObj = new JSONObject(json);
+        } catch (JSONException e) {
+            Log.e(TAG, "Error parsing data " + e.toString());
+        }
+
+        // return JSON String
+        return jObj;
     }
 
-    // Reads an InputStream and converts it to a String.
-    public static String readInputStream(InputStream stream) throws IOException {
-        int n = 0;
-        char[] buffer = new char[1024 * 4];
-        InputStreamReader reader = new InputStreamReader(stream, "UTF8");
-        StringWriter writer = new StringWriter();
-        while (-1 != (n = reader.read(buffer)))
-            writer.write(buffer, 0, n);
-        return writer.toString();
+    public Bitmap getPicFromUrl(String url) {
+        InputStream stream = null;
+        try {
+            DefaultHttpClient httpClient = new DefaultHttpClient();
+            HttpPost httpPost = new HttpPost(url);
+
+            HttpResponse httpResponse = httpClient.execute(httpPost);
+            HttpEntity httpEntity = httpResponse.getEntity();
+            stream = httpEntity.getContent();
+
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is, "iso-8859-1"), 8);
+            StringBuilder sb = new StringBuilder();
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                sb.append(line + "\n");
+            }
+            stream.close();
+
+        } catch (Exception e) {
+            Log.e(TAG, "Error converting result " + e.toString());
+        }
+
+        Bitmap logo = BitmapFactory.decodeStream(stream);
+
+        // return JSON String
+        return logo;
     }
 }

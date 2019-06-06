@@ -63,11 +63,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        try {
-            start();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
         show_food();
         createListeners();
 
@@ -99,13 +94,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void start() throws ParseException {
-        //Food test;
-        //test = new Food(600, "chicken", new SimpleDateFormat("dd/MM/yyyy").parse("12/05/2015"));
-
-       // String s = test.getThread();
-        //Log.d("API", s);
-    }
 
     public static void add_food(Food f){
             food_list.add(f);
@@ -138,7 +126,6 @@ public class MainActivity extends AppCompatActivity {
             ImageView iv;
             TableRow tr = (TableRow) tl.getChildAt(1);
             iv = (ImageView) tr.getChildAt(i);
-            System.out.println(i);
             frames.add(iv);
         }
         for(int i=0; i<4; i++){

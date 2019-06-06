@@ -3,12 +3,18 @@ package com.example.spoileralert;
 import android.content.Context;
 import android.util.Log;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.util.Calendar;
 import java.util.Random;
 
@@ -20,6 +26,10 @@ public class Food {
     private final Calendar spoil;
     private String URL = "https://www.food2fork.com/api/search?key=18e03eaa954ff60c4589c9766e5825b1";
 
+    private String recipe_name;
+    private String PicutreURL;
+    private String recipe_url;
+
     public Food(int quantity, String category, String name, Calendar spoil) {
         this.name = name;
         this.category = category;
@@ -27,30 +37,32 @@ public class Food {
         this.spoil = spoil;
     }
 
-    public String getThread(){
-
-        final StringBuilder s =  new StringBuilder();
-
+    public JSONObject getThread(){
+        final JSONObject[] jay_son = new JSONObject[1];
+        final Random rand = new Random();
+        final API api = new API();
         Thread t1 = new Thread(new Runnable() {
             @Override
             public void run() {
-                s.append(getRecipe());
+                jay_son[0] = api.getJSONFromUrl(URL+"&q=" + name+"&page="+ rand.nextInt(5));
             }
         });
         t1.start();
-        return s.toString();
-    }
-    public String getRecipe() {
-
-        Random rnd = new Random();
         try {
-            String url = URL + "&q=" + name + "&page=" + rnd.nextInt(4);
-            return API.downloadDataFromUrl(url);
-
-        } catch (IOException e) {
+            t1.join();
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return null;
+        return jay_son[0];
+    }
+
+    private static String readAll(Reader rd) throws IOException {
+        StringBuilder sb = new StringBuilder();
+        int cp;
+        while ((cp = rd.read()) != -1) {
+            sb.append((char) cp);
+        }
+        return sb.toString();
     }
 
     public boolean spoilsToday(Calendar currentDate){
