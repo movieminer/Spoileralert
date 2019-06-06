@@ -5,6 +5,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -35,6 +36,9 @@ import java.util.LinkedList;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String SHARED_PREFS = "sharedPrefs";
+    public static final String TEXT = "text";
+    public static final String SWITCH = "switch";
     private static LinkedList<Food> food_list =new LinkedList<>();
     private ArrayList<TextView> text= new ArrayList<>();
     private ArrayList<ImageView> frames = new ArrayList<>();
@@ -76,23 +80,32 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        try {
-            start();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
         show_food();
         createListeners();
 
-        //alarmservice
-        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        boolean switchOnOff = sharedPreferences.getBoolean(SWITCH, true);
 
-        Intent notificationIntent = new Intent(this, AlarmReceiver.class);
-        PendingIntent broadcast = PendingIntent.getBroadcast(this, 100, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        if(switchOnOff) {
+            String time = sharedPreferences.getString(TEXT, "15:00");
 
-        Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.SECOND, 15);
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), broadcast);
+            int hour = 15;
+            int min = 0;
+
+            if(time != null) {
+                hour = Integer.parseInt(sharedPreferences.getString(TEXT, "15:00").substring(0, 2));
+                min = Integer.parseInt(sharedPreferences.getString(TEXT, "15:00").substring(3, 5));
+            }
+            Calendar cal = Calendar.getInstance();
+            cal.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH), hour, min);
+
+
+            AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
+            Intent notificationIntent = new Intent(this, AlarmReceiver.class);
+            PendingIntent broadcast = PendingIntent.getBroadcast(this, 100, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), broadcast);
+        }
     }
     /*
     @Override
@@ -115,14 +128,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, PopActivity.class);
         intent.putExtra("index",i);
         startActivity(intent);
-    }
-
-    private void start() throws ParseException {
-        //Food test;
-        //test = new Food(600, "chicken", new SimpleDateFormat("dd/MM/yyyy").parse("12/05/2015"));
-
-       // String s = test.getThread();
-        //Log.d("API", s);
     }
 
     public static void add_food(Food f){
@@ -251,3 +256,4 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 }
+
