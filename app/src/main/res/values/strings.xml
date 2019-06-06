@@ -1,9 +1,15 @@
 <resources>
     <string name="app_name">Spoileralert</string>
-    <string name="expdate">Expire date</string>
+    <string name="expdate">Expiration date</string>
     <string name="credits">"Spoileralert made by:\n \n Thijs de Jong,\nJulian van der Horst,\nLuc Slaats,\nMichiel van de Noort\n en\nJochem Neels \n \n Group 13"
     </string>
     <string name="save_settings">Save Settings</string>
     <string name="get_notif">Get Notifications</string>
     <string name="time_of_notif">Time of notification</string>
+    <string name="product">Product:</string>
+    <string name="quantitySumm">Quantity:</string>
+    <string name="expire_date">Expiration date:</string>
+    <string name="summary">Summary</string>
+    <string name="quantity">Quantity g/ml</string>
+    <string name="category">Category:</string>
 </resources>
