@@ -59,6 +59,26 @@ public class Food {
                 currentDate.get(Calendar.YEAR) == spoil.get(Calendar.YEAR));
     }
 
+    public boolean alreadySpoiled(Calendar currentDate){
+
+        if(currentDate.get(Calendar.YEAR) < spoil.get(Calendar.YEAR)){
+            return true;
+        }else if(currentDate.get(Calendar.YEAR) > spoil.get(Calendar.YEAR)){
+            return false;
+        }
+        if(currentDate.get(Calendar.MONTH) < spoil.get(Calendar.MONTH)){
+            return true;
+        }else if(currentDate.get(Calendar.MONTH) > spoil.get(Calendar.MONTH)){
+            return false;
+        }
+        if(currentDate.get(Calendar.DAY_OF_MONTH) < spoil.get(Calendar.DAY_OF_MONTH)){
+            return true;
+        }else if(currentDate.get(Calendar.DAY_OF_MONTH) > spoil.get(Calendar.DAY_OF_MONTH)){
+            return false;
+        }
+        return false;
+    }
+
     public String getName() {
         return name;
     }

@@ -5,6 +5,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -115,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
             ImageView iv;
             TableRow tr = (TableRow) tl.getChildAt(1);
             iv = (ImageView) tr.getChildAt(i);
+            System.out.println(i);
             frames.add(iv);
         }
         for(int i=0; i<4; i++){
@@ -165,7 +167,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void show_food(){
+    public void show_food(){
+        Calendar cal = Calendar.getInstance();
         for(int i=0; i<food_list.size(); i++){
             if(food_list.get(i).getCategory().equals("Meat")){
                 frames.get(i).setImageResource(R.drawable.meat);
@@ -186,6 +189,12 @@ public class MainActivity extends AppCompatActivity {
                 frames.get(i).setImageResource(R.drawable.dairy);
                 text.get(i).setText(food_list.get(i).getName());
                 text.get(i).setGravity(Gravity.CENTER);
+            }
+
+            if(food_list.get(i).spoilsToday(cal)){
+                text.get(i).setTextColor(Color.rgb(226, 29, 29));
+            }else if(food_list.get(i).alreadySpoiled(cal)){
+                text.get(i).setTextColor(Color.rgb(255, 255, 0));
             }
         }
         for(int i=food_list.size(); i<16; i++){
