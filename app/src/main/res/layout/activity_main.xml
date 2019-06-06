@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context=".MainActivity" android:theme="@style/AppTheme">
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:theme="@style/AppTheme"
+    tools:context=".MainActivity">
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/add_button"
@@ -51,88 +51,317 @@
         android:layout_marginBottom="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/fridge" />
 
-    <ImageView
-        android:id="@+id/imageProduct00"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="45dp"
-        android:layout_marginTop="85dp"
+    <TableLayout
+        android:id="@+id/FoodLayout"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="10dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/dairy" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/textProduct00"
-        android:layout_width="64dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="45dp"
-        android:text="testtesxt"
-        app:layout_constraintBottom_toTopOf="@+id/imageProduct00"
-        app:layout_constraintStart_toStartOf="parent" />
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
-    <ImageView
-        android:id="@+id/imageProduct01"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="85dp"
-        app:layout_constraintStart_toEndOf="@+id/imageProduct00"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/dairy" />
+            <TextView
+                android:id="@+id/textView00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="TextView" />
 
-    <TextView
-        android:id="@+id/textProduct01"
-        android:layout_width="64dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="testtesxt"
-        app:layout_constraintBottom_toTopOf="@+id/imageProduct01"
-        app:layout_constraintStart_toEndOf="@+id/textProduct00" />
+            <TextView
+                android:id="@+id/textView01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="TextView" />
 
-    <ImageView
-        android:id="@+id/imageProduct02"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="85dp"
-        app:layout_constraintStart_toEndOf="@+id/imageProduct01"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/dairy" />
+            <TextView
+                android:id="@+id/textView02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="TextView" />
 
-    <TextView
-        android:id="@+id/textProduct02"
-        android:layout_width="64dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="testtesxt"
-        app:layout_constraintBottom_toTopOf="@+id/imageProduct02"
-        app:layout_constraintStart_toEndOf="@+id/textProduct01" />
+            <TextView
+                android:id="@+id/textView03"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="TextView" />
 
-    <ImageView
-        android:id="@+id/imageProduct03"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="85dp"
-        android:layout_marginEnd="45dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageProduct02"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/dairy" />
+        </TableRow>
 
-    <TextView
-        android:id="@+id/textProduct03"
-        android:layout_width="64dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="45dp"
-        android:text="testtesxt"
-        app:layout_constraintBottom_toTopOf="@+id/imageProduct03"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textProduct02" />
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imageView00"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/dairy" />
+
+            <ImageView
+                android:id="@+id/imageView01"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/dairy" />
+
+            <ImageView
+                android:id="@+id/imageView02"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/dairy" />
+
+            <ImageView
+                android:id="@+id/imageView03"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/dairy" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="TextView" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imageView10"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/dairy" />
+
+            <ImageView
+                android:id="@+id/imageView11"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/dairy" />
+
+            <ImageView
+                android:id="@+id/imageView12"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/dairy" />
+
+            <ImageView
+                android:id="@+id/imageView13"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/dairy" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/textView21"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/textView22"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/textView23"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="TextView" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imageView20"
+                android:layout_width="82dp"
+                android:layout_height="120dp"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/dairy" />
+
+            <ImageView
+                android:id="@+id/imageView21"
+                android:layout_width="82dp"
+                android:layout_height="120dp"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/dairy" />
+
+            <ImageView
+                android:id="@+id/imageView22"
+                android:layout_width="82dp"
+                android:layout_height="120dp"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/dairy" />
+
+            <ImageView
+                android:id="@+id/imageView23"
+                android:layout_width="82dp"
+                android:layout_height="120dp"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/dairy" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView30"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/textView31"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/textView32"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/textView33"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="TextView" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imageView30"
+                android:layout_width="82dp"
+                android:layout_height="82dp"
+                android:layout_weight="1"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/dairy" />
+
+            <ImageView
+                android:id="@+id/imageView31"
+                android:layout_width="82dp"
+                android:layout_height="80dp"
+                android:layout_weight="1"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/dairy" />
+
+            <ImageView
+                android:id="@+id/imageView32"
+                android:layout_width="82dp"
+                android:layout_height="82dp"
+                android:layout_weight="1"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/dairy" />
+
+            <ImageView
+                android:id="@+id/imageView33"
+                android:layout_width="82dp"
+                android:layout_height="82dp"
+                android:layout_weight="1"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/dairy" />
+
+        </TableRow>
+
+    </TableLayout>
 
 </android.support.constraint.ConstraintLayout>
