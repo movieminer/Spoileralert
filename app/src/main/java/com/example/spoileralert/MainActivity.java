@@ -236,9 +236,10 @@ public class MainActivity extends AppCompatActivity {
             }
 
             if(food_list.get(i).spoilsToday(cal)){
-                text.get(i).setTextColor(Color.rgb(226, 29, 29));
-            }else if(food_list.get(i).alreadySpoiled(cal)){
                 text.get(i).setTextColor(Color.rgb(255, 255, 0));
+
+            }else if(food_list.get(i).alreadySpoiled(cal)){
+                text.get(i).setTextColor(Color.rgb(226, 29, 29));
             }
         }
         for(int i=food_list.size(); i<16; i++){
