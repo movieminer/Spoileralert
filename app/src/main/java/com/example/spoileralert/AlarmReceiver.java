@@ -14,7 +14,7 @@ import android.os.Build;
 import static android.app.NotificationManager.IMPORTANCE_DEFAULT;
 
 public class AlarmReceiver extends BroadcastReceiver{
-    private static final String CHANNEL_ID = "com.singhajit.notificationDemo.channelId";
+    private static final String CHANNEL_ID = "channelId";
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -26,15 +26,18 @@ public class AlarmReceiver extends BroadcastReceiver{
 
         PendingIntent pendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        Notification.Builder builder = new Notification.Builder(context, "id");
+        Notification.Builder builder = new Notification.Builder(context, CHANNEL_ID);
 
         String contentTitle = SpoilsNotification.spoiledFoodDisplayMessage(MainActivity.getFood_list());
 
         Notification notification = builder.setContentTitle(contentTitle)
+                .setVisibility(Notification.VISIBILITY_PUBLIC)
                 .setContentText("Open Spoiler Alert for more information.")
                 .setTicker("New Message From Spoiler Alert!")
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentIntent(pendingIntent).build();
+
+
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             builder.setChannelId(CHANNEL_ID);
@@ -45,9 +48,15 @@ public class AlarmReceiver extends BroadcastReceiver{
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(
                     CHANNEL_ID,
-                    "NotificationDemo",
-                    IMPORTANCE_DEFAULT
+                    "Spoil Alert",
+                    NotificationManager.IMPORTANCE_HIGH
             );
+            channel.enableVibration(true);
+            channel.enableLights(true);
+            channel.setLockscreenVisibility(1);
+            channel.setLightColor(3);
+
+
             notificationManager.createNotificationChannel(channel);
         }
 
