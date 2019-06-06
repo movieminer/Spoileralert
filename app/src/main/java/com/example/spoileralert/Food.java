@@ -51,6 +51,10 @@ public class Food {
         return null;
     }
 
+    public boolean spoilsToday(Calendar currentDate){
+        return currentDate.DAY_OF_MONTH == this.spoil.DAY_OF_MONTH && currentDate.MONTH == this.spoil.MONTH && currentDate.YEAR == this.spoil.YEAR;
+    }
+
     public String getName() {
         return name;
     }
