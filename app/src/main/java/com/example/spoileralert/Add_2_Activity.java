@@ -42,7 +42,7 @@ public class Add_2_Activity extends AppCompatActivity {
         final Spinner spinner1 = findViewById(R.id.spinner1);
 
 
-        Integer[] list = {100, 200,300, 400, 500, 600, 700, 800, 900, 1000, 1500};
+        Integer[] list = {100, 200,300, 400, 500, 600, 700, 800, 900, 1000, 1500, 2000};
 
         ArrayAdapter<Integer> dataAdapter = new ArrayAdapter<>(this, R.layout.spinner_layout, list);
         dataAdapter.setDropDownViewResource(R.layout.spinner_layout);
