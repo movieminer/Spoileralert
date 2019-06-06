@@ -53,11 +53,7 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        SettingActivity settingActivity = new SettingActivity();
-
-        settingActivity.loadData();
-        settingActivity.updateViews();
-        }
+    }
 
 
 
