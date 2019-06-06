@@ -28,6 +28,7 @@ public class Add_2_Activity extends AppCompatActivity {
     private String date;
     private String quantity;
     private String name;
+    private String category;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +37,7 @@ public class Add_2_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_add_food_2);
 
         name = getIntent().getStringExtra("name");
+        category = getIntent().getStringExtra("category");
 
         final Spinner spinner1 = findViewById(R.id.spinner1);
 
@@ -93,6 +95,7 @@ public class Add_2_Activity extends AppCompatActivity {
             intent.putExtra("name", name);
             intent.putExtra("date", date);
             intent.putExtra("quantity", quantity);
+            intent.putExtra("category", category);
             startActivity(intent);
         }
     }
