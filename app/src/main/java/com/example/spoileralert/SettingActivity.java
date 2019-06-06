@@ -38,15 +38,7 @@ public class SettingActivity extends AppCompatActivity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_settings);
         view = findViewById(R.id.time_view);
-        FloatingActionButton back_button = findViewById(R.id.back_button);
         context=this;
-
-        back_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openActivityBack();
-            }
-        });
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override
