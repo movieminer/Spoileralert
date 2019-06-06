@@ -123,8 +123,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public static void removefood(){
-
+    public static void removefood(int i){
+        food_list.remove(i);
     }
 
     public static LinkedList<Food> getFood_list() {
