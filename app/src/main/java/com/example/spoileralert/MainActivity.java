@@ -8,16 +8,22 @@ import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
@@ -25,7 +31,9 @@ import java.util.LinkedList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static LinkedList<Food> food_list;
+    private static LinkedList<Food> food_list =new LinkedList<>();
+    private ArrayList<TextView> text= new ArrayList<>();
+    private ArrayList<ImageView> frames = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +42,11 @@ public class MainActivity extends AppCompatActivity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
 
+        getFrameArr();
+        getTextArr();
+
         FloatingActionButton add_button = findViewById(R.id.add_button);
-        food_list = new LinkedList<>();
+
         add_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        show_food();
 
         //alarmservice
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
@@ -93,5 +105,92 @@ public class MainActivity extends AppCompatActivity {
 
     public static LinkedList<Food> getFood_list() {
         return food_list;
+    }
+
+    public void getFrameArr(){
+        TableLayout tl = findViewById(R.id.FoodLayout);
+
+        for(int i=0; i<4; i++){
+            ImageView iv;
+            TableRow tr = (TableRow) tl.getChildAt(1);
+            iv = (ImageView) tr.getChildAt(i);
+            System.out.println(i);
+            frames.add(iv);
+        }
+        for(int i=0; i<4; i++){
+            ImageView iv;
+            TableRow tr = (TableRow) tl.getChildAt(3);
+            iv = (ImageView) tr.getChildAt(i);
+            frames.add(iv);
+        }
+        for(int i=0; i<4; i++){
+            ImageView iv;
+            TableRow tr = (TableRow) tl.getChildAt(5);
+            iv = (ImageView) tr.getChildAt(i);
+            frames.add(iv);
+        }
+        for(int i=0; i<4; i++){
+            ImageView iv;
+            TableRow tr = (TableRow) tl.getChildAt(7);
+            iv = (ImageView) tr.getChildAt(i);
+            frames.add(iv);
+        }
+    }
+    public void getTextArr(){
+        TableLayout tl = findViewById(R.id.FoodLayout);
+
+        for(int i=0; i<4; i++){
+            TextView tv;
+            TableRow tr = (TableRow) tl.getChildAt(0);
+            tv = (TextView) tr.getChildAt(i);
+            text.add(tv);
+        }
+        for(int i=0; i<4; i++){
+            TextView tv;
+            TableRow tr = (TableRow) tl.getChildAt(2);
+            tv = (TextView) tr.getChildAt(i);
+            text.add(tv);
+        }
+        for(int i=0; i<4; i++){
+            TextView tv;
+            TableRow tr = (TableRow) tl.getChildAt(4);
+            tv = (TextView) tr.getChildAt(i);
+            text.add(tv);
+        }
+        for(int i=0; i<4; i++){
+            TextView tv;
+            TableRow tr = (TableRow) tl.getChildAt(6);
+            tv = (TextView) tr.getChildAt(i);
+            text.add(tv);
+        }
+    }
+
+    public void show_food(){
+        for(int i=0; i<food_list.size(); i++){
+            if(food_list.get(i).getCategory().equals("Meat")){
+                frames.get(i).setImageResource(R.drawable.meat);
+                text.get(i).setText(food_list.get(i).getName());
+                text.get(i).setGravity(Gravity.CENTER);
+            }
+            else if(food_list.get(i).getCategory().equals("Vegetables")){
+                frames.get(i).setImageResource(R.drawable.vegetables);
+                text.get(i).setText(food_list.get(i).getName());
+                text.get(i).setGravity(Gravity.CENTER);
+            }
+            else if(food_list.get(i).getCategory().equals("Liquids")){
+                frames.get(i).setImageResource(R.drawable.liquids);
+                text.get(i).setText(food_list.get(i).getName());
+                text.get(i).setGravity(Gravity.CENTER);
+            }
+            else{
+                frames.get(i).setImageResource(R.drawable.dairy);
+                text.get(i).setText(food_list.get(i).getName());
+                text.get(i).setGravity(Gravity.CENTER);
+            }
+        }
+        for(int i=food_list.size(); i<16; i++){
+            frames.get(i).setImageResource(R.drawable.empty);
+            text.get(i).setText("");
+        }
     }
 }
