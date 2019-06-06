@@ -33,7 +33,7 @@ public class AlarmReceiver extends BroadcastReceiver{
         Notification notification = builder.setContentTitle(contentTitle)
                 .setContentText("Open Spoiler Alert for more information.")
                 .setTicker("New Message From Spoiler Alert!")
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(R.drawable.appel)
                 .setContentIntent(pendingIntent).build();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
