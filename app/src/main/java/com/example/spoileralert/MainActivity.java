@@ -99,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
        // String s = test.getThread();
         //Log.d("API", s);
     }
+
     public static void add_food(Food f){
             food_list.add(f);
     }
@@ -107,14 +108,13 @@ public class MainActivity extends AppCompatActivity {
         return food_list;
     }
 
-    public void getFrameArr(){
+    private void getFrameArr(){
         TableLayout tl = findViewById(R.id.FoodLayout);
 
         for(int i=0; i<4; i++){
             ImageView iv;
             TableRow tr = (TableRow) tl.getChildAt(1);
             iv = (ImageView) tr.getChildAt(i);
-            System.out.println(i);
             frames.add(iv);
         }
         for(int i=0; i<4; i++){
@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
             frames.add(iv);
         }
     }
-    public void getTextArr(){
+    private void getTextArr(){
         TableLayout tl = findViewById(R.id.FoodLayout);
 
         for(int i=0; i<4; i++){
@@ -165,7 +165,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void show_food(){
+    private void show_food(){
         for(int i=0; i<food_list.size(); i++){
             if(food_list.get(i).getCategory().equals("Meat")){
                 frames.get(i).setImageResource(R.drawable.meat);

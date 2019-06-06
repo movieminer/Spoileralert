@@ -42,7 +42,7 @@ public class Add_3_Activity extends AppCompatActivity {
         });
     }
 
-    public void openActivityADD() {
+    private void openActivityADD() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         Calendar cal = Calendar.getInstance();
         try {

@@ -9,6 +9,7 @@ import android.support.v4.app.NotificationCompat;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -16,24 +17,26 @@ import static android.support.v4.content.ContextCompat.getSystemService;
 
 public class SpoilsNotification {
 
-    private static LinkedList<Food> spoilsToday =  new LinkedList<>();
     private static String display;
 
     public SpoilsNotification(){
     }
 
     public static String spoiledFoodDisplayMessage(LinkedList<Food> currentFoods){
+        int spoiled=0;
+        Date currentTime = new java.util.Date();
         Calendar currentDate = Calendar.getInstance();
+        currentDate.setTime(currentTime);
         for(Food food : currentFoods){
             if(food.spoilsToday(currentDate)){
-                spoilsToday.add(food);
+               spoiled++;
             }
         }
 
-        if(spoilsToday.size() == 1){
-            display = "You have " + spoilsToday.size() + " product that will spoil today.";
+        if(spoiled == 1){
+            display = "You have " + spoiled + " product that will spoil today.";
         } else {
-            display = "You have " + spoilsToday.size() + " products that will spoil today.";
+            display = "You have " + spoiled + " products that will spoil today.";
         }
 
 
