@@ -21,7 +21,7 @@ public class Food implements Serializable, Comparable<Food> {
     private final Calendar spoil;
     private String URL = "https://www.food2fork.com/api/search?key=18e03eaa954ff60c4589c9766e5825b1";
 
-    private Food(int quantity, String category, String name, Calendar spoil) {
+    Food(int quantity, String category, String name, Calendar spoil) {
         this.name = name;
         this.category = category;
         this.quantity = quantity;
