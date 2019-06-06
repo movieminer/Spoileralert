@@ -15,6 +15,7 @@ import android.widget.Spinner;
 public class AddActivity extends AppCompatActivity {
 
     private String name= "state";
+    private String category="placeholder";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,15 +46,19 @@ public class AddActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(position==0){
+                    category="Meat";
                    setSpinner2(Meat);
                 }
                 else if(position==1){
+                    category="Vegetables";
                     setSpinner2(Vegetables);
                 }
                 else if(position==2){
+                    category="Liquids";
                     setSpinner2(Liquids);
                 }
                 else if(position==3){
+                    category="DiaryEggs";
                     setSpinner2(DairyEggs);
                 }
             }
@@ -76,6 +81,7 @@ public class AddActivity extends AppCompatActivity {
     public void openActivityADD() {
         Intent intent = new Intent(this, Add_2_Activity.class);
         intent.putExtra("name", name);
+        intent.putExtra("category", category);
         startActivity(intent);
 
     }

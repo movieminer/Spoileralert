@@ -16,11 +16,13 @@ public class Food {
 
     private int quantity;
     private String name;
+    private String category;
     private Calendar spoil;
     private String URL = "https://www.food2fork.com/api/search?key=18e03eaa954ff60c4589c9766e5825b1";
 
-    public Food(int quantity, String name, Calendar spoil) {
+    public Food(int quantity, String category, String name, Calendar spoil) {
         this.name = name;
+        this.category = category;
         this.quantity = quantity;
         this.spoil = spoil;
     }
@@ -61,6 +63,10 @@ public class Food {
 
     public Calendar getSpoil() {
         return spoil;
+    }
+
+    public String getCategory() {
+        return category;
     }
 
     public int getQuantity() {
