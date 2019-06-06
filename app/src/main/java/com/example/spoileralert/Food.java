@@ -6,13 +6,14 @@ import android.util.Log;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Calendar;
 import java.util.Random;
 
-public class Food {
+public class Food implements Serializable, Comparable<Food> {
 
     private int quantity;
     private final String name;
@@ -93,5 +94,10 @@ public class Food {
 
     public int getQuantity() {
         return quantity;
+    }
+
+    @Override
+    public int compareTo(Food food) {
+        return (getSpoil().compareTo(food.getSpoil()));
     }
 }

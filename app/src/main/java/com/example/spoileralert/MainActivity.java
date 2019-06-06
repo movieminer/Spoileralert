@@ -23,10 +23,13 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.LinkedList;
 
@@ -39,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
     private static LinkedList<Food> food_list =new LinkedList<>();
     private ArrayList<TextView> text= new ArrayList<>();
     private ArrayList<ImageView> frames = new ArrayList<>();
+    private static final String KEY = "food_list";
+    private static Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +51,14 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
+        context = this;
+        try {
+            food_list = (LinkedList<Food>) InternalStorage.readObject(this, KEY);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
 
         getFrameArr();
         getTextArr();
@@ -68,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         show_food();
+        createListeners();
 
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         boolean switchOnOff = sharedPreferences.getBoolean(SWITCH, true);
@@ -93,21 +107,53 @@ public class MainActivity extends AppCompatActivity {
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), broadcast);
         }
     }
+    /*
+    @Override
+    protected void onPause(){
+        super.onPause();
+    }*/
 
 
 
 
-    public void openActivityADD() {
+    private void openActivityADD() {
         Intent intent = new Intent(this, AddActivity.class);
         startActivity(intent);
     }
-    public void openActivitySet() {
+    private void openActivitySet() {
         Intent intent = new Intent(this, SettingActivity.class);
+        startActivity(intent);
+    }
+    private void openActivityPop(int i){
+        Intent intent = new Intent(this, PopActivity.class);
+        intent.putExtra("index",i);
         startActivity(intent);
     }
 
     public static void add_food(Food f){
             food_list.add(f);
+        try {
+            InternalStorage.writeObject(context, KEY, food_list);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void createListeners(){
+        for(int i=0; i<food_list.size();i++){
+            final int finalI = i;
+            frames.get(i).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    openActivityPop(finalI);
+                }
+            });
+        }
+    }
+
+    public static void removefood(int i){
+        food_list.remove(i);
     }
 
     public static LinkedList<Food> getFood_list() {
@@ -172,39 +218,39 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void show_food(){
+    public void show_food() {
         Calendar cal = Calendar.getInstance();
-        for(int i=0; i<food_list.size(); i++){
-            switch (food_list.get(i).getCategory()) {
-                case "Meat":
-                    frames.get(i).setImageResource(R.drawable.meat);
-                    text.get(i).setText(food_list.get(i).getName());
-                    text.get(i).setGravity(Gravity.CENTER);
-                    break;
-                case "Vegetables":
-                    frames.get(i).setImageResource(R.drawable.vegetables);
-                    text.get(i).setText(food_list.get(i).getName());
-                    text.get(i).setGravity(Gravity.CENTER);
-                    break;
-                case "Liquids":
-                    frames.get(i).setImageResource(R.drawable.liquids);
-                    text.get(i).setText(food_list.get(i).getName());
-                    text.get(i).setGravity(Gravity.CENTER);
-                    break;
-                default:
-                    frames.get(i).setImageResource(R.drawable.dairy);
-                    text.get(i).setText(food_list.get(i).getName());
-                    text.get(i).setGravity(Gravity.CENTER);
-                    break;
+        for (int i = 0; i < food_list.size(); i++) {
+            if (food_list.get(i).getCategory().equals("Meat")) {
+                frames.get(i).setImageResource(R.drawable.meat);
+                text.get(i).setText(food_list.get(i).getName());
+                text.get(i).setGravity(Gravity.CENTER);
+            } else if (food_list.get(i).getCategory().equals("Vegetables")) {
+                frames.get(i).setImageResource(R.drawable.vegetables);
+                text.get(i).setText(food_list.get(i).getName());
+                text.get(i).setGravity(Gravity.CENTER);
+            } else if (food_list.get(i).getCategory().equals("Liquids")) {
+                frames.get(i).setImageResource(R.drawable.liquids);
+                text.get(i).setText(food_list.get(i).getName());
+                text.get(i).setGravity(Gravity.CENTER);
+            } else {
+                frames.get(i).setImageResource(R.drawable.dairy);
+                text.get(i).setText(food_list.get(i).getName());
+                text.get(i).setGravity(Gravity.CENTER);
             }
 
-            if(food_list.get(i).spoilsToday(cal)){
-                text.get(i).setTextColor(Color.rgb(255, 153, 0));
-            }else if(food_list.get(i).alreadySpoiled(cal)){
-                text.get(i).setTextColor(Color.rgb(226, 29, 29));
+            if (food_list.get(i).spoilsToday(cal)) {
+                text.get(i).setTextColor(Color.rgb(255, 255, 0));
+
+            } else if (food_list.get(i).alreadySpoiled(cal)) {
+                if (food_list.get(i).spoilsToday(cal)) {
+                    text.get(i).setTextColor(Color.rgb(226, 29, 29));
+                } else if (food_list.get(i).alreadySpoiled(cal)) {
+                    text.get(i).setTextColor(Color.rgb(255, 255, 0));
+                }
             }
         }
-        for(int i=food_list.size(); i<16; i++){
+        for (int i = food_list.size(); i < 16; i++) {
             frames.get(i).setImageResource(R.drawable.empty);
             text.get(i).setText("");
         }
