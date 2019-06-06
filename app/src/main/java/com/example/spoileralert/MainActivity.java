@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         show_food();
+        createListeners();
 
         //alarmservice
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
@@ -83,12 +84,17 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    public void openActivityADD() {
+    private void openActivityADD() {
         Intent intent = new Intent(this, AddActivity.class);
         startActivity(intent);
     }
-    public void openActivitySet() {
+    private void openActivitySet() {
         Intent intent = new Intent(this, SettingActivity.class);
+        startActivity(intent);
+    }
+    private void openActivityPop(int i){
+        Intent intent = new Intent(this, PopActivity.class);
+        intent.putExtra("index",i);
         startActivity(intent);
     }
 
@@ -102,6 +108,22 @@ public class MainActivity extends AppCompatActivity {
 
     public static void add_food(Food f){
             food_list.add(f);
+    }
+
+    private void createListeners(){
+        for(int i=0; i<food_list.size();i++){
+            final int finalI = i;
+            frames.get(i).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    openActivityPop(finalI);
+                }
+            });
+        }
+    }
+
+    public static void removefood(){
+
     }
 
     public static LinkedList<Food> getFood_list() {
