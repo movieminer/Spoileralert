@@ -32,7 +32,7 @@ public class AddActivity extends AppCompatActivity {
         String[] list = {"Meat", "Vegetables", "Liquids", "Dairy/Eggs" };
 
 
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, R.layout.spinner_layout, list);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this, R.layout.spinner_layout, list);
         dataAdapter.setDropDownViewResource(R.layout.spinner_layout);
         spinner1.setAdapter(dataAdapter);
 
@@ -40,8 +40,8 @@ public class AddActivity extends AppCompatActivity {
 
             String[] Meat = {"Beef", "Chicken", "Fish", "Pork"};
             String[] Vegetables = {"Broccoli", "Cucumber", "Lettuce", "Paprika"};
-            String[] Liquids = {"Alcoholic Drink", "Breakfast Drink", "Fizzy Drink", "Fruit Juice",};
-            String[] DairyEggs = { "Butter", "Cheese", "Custard", "Eggs", "Whipped Cream", "Yogurt"};
+            String[] Liquids = {"Beer", "Fruit Juice", "Orange Juice"};
+            String[] DairyEggs = { "Butter", "Cheese", "Crème fraîche", "Eggs", "Milk", "Whipped Cream", "Yogurt"};
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -89,7 +89,7 @@ public class AddActivity extends AppCompatActivity {
     public void setSpinner2(String[] arr){
 
         final Spinner spinner2 = findViewById(R.id.spinner2);
-        ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<>(this,
                 R.layout.spinner_layout, arr);
         dataAdapter2.setDropDownViewResource(R.layout.spinner_layout);
         spinner2.setAdapter(dataAdapter2);

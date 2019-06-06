@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.spoileralert">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
@@ -14,25 +14,34 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <uses-library android:name="org.apache.http.legacy" android:required="false"/>
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AddActivity"/>
+        <activity android:name=".AddActivity" />
         <activity android:name=".Add_2_Activity" />
         <activity android:name=".Add_3_Activity" />
-        <activity android:name=".NotificationActivity"/>
+        <activity android:name=".NotificationActivity" />
+
         <receiver android:name=".AlarmReceiver">
             <intent-filter>
-                <action android:name="action.DISPLAY_NOTIFICATION"/>
+                <action android:name="action.DISPLAY_NOTIFICATION" />
             </intent-filter>
         </receiver>
+
         <activity android:name=".SettingActivity" />
-        <activity android:name=".PopActivity" android:theme="@style/AppTheme.CustomTheme"/>
         <activity android:name=".PopRecipeActivity" android:theme="@style/AppTheme.CustomTheme"/>
+        <activity
+            android:name=".PopActivity"
+            android:theme="@style/AppTheme.CustomTheme" />
+        <activity
+            android:name=".DeleteActivity"
+            android:theme="@style/AppTheme.CustomTheme" />
     </application>
 
 </manifest>

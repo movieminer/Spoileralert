@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -18,7 +19,7 @@ import java.nio.charset.Charset;
 import java.util.Calendar;
 import java.util.Random;
 
-public class Food {
+public class Food implements Serializable, Comparable<Food> {
 
     private int quantity;
     private final String name;
@@ -29,8 +30,7 @@ public class Food {
     private String recipe_name;
     private String PicutreURL;
     private String recipe_url;
-
-    public Food(int quantity, String category, String name, Calendar spoil) {
+    Food(int quantity, String category, String name, Calendar spoil) {
         this.name = name;
         this.category = category;
         this.quantity = quantity;
@@ -65,27 +65,27 @@ public class Food {
         return sb.toString();
     }
 
-    public boolean spoilsToday(Calendar currentDate){
+    boolean spoilsToday(Calendar currentDate){
         return (currentDate.get(Calendar.DAY_OF_MONTH)== spoil.get(Calendar.DAY_OF_MONTH) &&
                 currentDate.get(Calendar.MONTH) == spoil.get(Calendar.MONTH) &&
                 currentDate.get(Calendar.YEAR) == spoil.get(Calendar.YEAR));
     }
 
-    public boolean alreadySpoiled(Calendar currentDate){
+    boolean alreadySpoiled(Calendar currentDate){
 
-        if(currentDate.get(Calendar.YEAR) < spoil.get(Calendar.YEAR)){
+        if(currentDate.get(Calendar.YEAR) > spoil.get(Calendar.YEAR)){
             return true;
-        }else if(currentDate.get(Calendar.YEAR) > spoil.get(Calendar.YEAR)){
+        }else if(currentDate.get(Calendar.YEAR) < spoil.get(Calendar.YEAR)){
             return false;
         }
-        if(currentDate.get(Calendar.MONTH) < spoil.get(Calendar.MONTH)){
+        if(currentDate.get(Calendar.MONTH) > spoil.get(Calendar.MONTH)){
             return true;
-        }else if(currentDate.get(Calendar.MONTH) > spoil.get(Calendar.MONTH)){
+        }else if(currentDate.get(Calendar.MONTH) < spoil.get(Calendar.MONTH)){
             return false;
         }
-        if(currentDate.get(Calendar.DAY_OF_MONTH) < spoil.get(Calendar.DAY_OF_MONTH)){
+        if(currentDate.get(Calendar.DAY_OF_MONTH) > spoil.get(Calendar.DAY_OF_MONTH)){
             return true;
-        }else if(currentDate.get(Calendar.DAY_OF_MONTH) > spoil.get(Calendar.DAY_OF_MONTH)){
+        }else if(currentDate.get(Calendar.DAY_OF_MONTH) < spoil.get(Calendar.DAY_OF_MONTH)){
             return false;
         }
         return false;
@@ -99,11 +99,16 @@ public class Food {
         return spoil;
     }
 
-    public String getCategory() {
+    String getCategory() {
         return category;
     }
 
     public int getQuantity() {
         return quantity;
+    }
+
+    @Override
+    public int compareTo(Food food) {
+        return (getSpoil().compareTo(food.getSpoil()));
     }
 }

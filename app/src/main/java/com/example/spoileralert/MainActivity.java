@@ -5,6 +5,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -22,19 +23,27 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.LinkedList;
 
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String SHARED_PREFS = "sharedPrefs";
+    public static final String TEXT = "text";
+    public static final String SWITCH = "switch";
     private static LinkedList<Food> food_list =new LinkedList<>();
     private ArrayList<TextView> text= new ArrayList<>();
     private ArrayList<ImageView> frames = new ArrayList<>();
+    private static final String KEY = "food_list";
+    private static Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +51,14 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
+        context = this;
+        try {
+            food_list = (LinkedList<Food>) InternalStorage.readObject(this, KEY);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
 
         getFrameArr();
         getTextArr();
@@ -66,16 +83,35 @@ public class MainActivity extends AppCompatActivity {
         show_food();
         createListeners();
 
-        //alarmservice
-        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        boolean switchOnOff = sharedPreferences.getBoolean(SWITCH, true);
 
-        Intent notificationIntent = new Intent(this, AlarmReceiver.class);
-        PendingIntent broadcast = PendingIntent.getBroadcast(this, 100, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        if(switchOnOff) {
+            String time = sharedPreferences.getString(TEXT, "15:00");
 
-        Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.SECOND, 15);
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), broadcast);
+            int hour = 15;
+            int min = 0;
+
+            if(time != null) {
+                hour = Integer.parseInt(sharedPreferences.getString(TEXT, "15:00").substring(0, 2));
+                min = Integer.parseInt(sharedPreferences.getString(TEXT, "15:00").substring(3, 5));
+            }
+            Calendar cal = Calendar.getInstance();
+            cal.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH), hour, min);
+
+
+            AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
+            Intent notificationIntent = new Intent(this, AlarmReceiver.class);
+            PendingIntent broadcast = PendingIntent.getBroadcast(this, 100, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), broadcast);
+        }
     }
+    /*
+    @Override
+    protected void onPause(){
+        super.onPause();
+    }*/
 
 
 
@@ -94,9 +130,14 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
     public static void add_food(Food f){
             food_list.add(f);
+        try {
+            InternalStorage.writeObject(context, KEY, food_list);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     private void createListeners(){
@@ -113,6 +154,11 @@ public class MainActivity extends AppCompatActivity {
 
     public static void removefood(int i){
         food_list.remove(i);
+        try {
+            InternalStorage.writeObject(context, KEY, food_list);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static LinkedList<Food> getFood_list() {
@@ -176,39 +222,47 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void show_food(){
+    public void show_food() {
         Calendar cal = Calendar.getInstance();
-        for(int i=0; i<food_list.size(); i++){
-            if(food_list.get(i).getCategory().equals("Meat")){
-                frames.get(i).setImageResource(R.drawable.meat);
-                text.get(i).setText(food_list.get(i).getName());
-                text.get(i).setGravity(Gravity.CENTER);
-            }
-            else if(food_list.get(i).getCategory().equals("Vegetables")){
-                frames.get(i).setImageResource(R.drawable.vegetables);
-                text.get(i).setText(food_list.get(i).getName());
-                text.get(i).setGravity(Gravity.CENTER);
-            }
-            else if(food_list.get(i).getCategory().equals("Liquids")){
-                frames.get(i).setImageResource(R.drawable.liquids);
-                text.get(i).setText(food_list.get(i).getName());
-                text.get(i).setGravity(Gravity.CENTER);
-            }
-            else{
-                frames.get(i).setImageResource(R.drawable.dairy);
-                text.get(i).setText(food_list.get(i).getName());
-                text.get(i).setGravity(Gravity.CENTER);
+        for (int i = 0; i < food_list.size(); i++) {
+            switch (food_list.get(i).getCategory()) {
+                case "Meat":
+                    frames.get(i).setImageResource(R.drawable.meat);
+                    text.get(i).setText(food_list.get(i).getName());
+                    text.get(i).setGravity(Gravity.CENTER);
+                    break;
+                case "Vegetables":
+                    frames.get(i).setImageResource(R.drawable.vegetables);
+                    text.get(i).setText(food_list.get(i).getName());
+                    text.get(i).setGravity(Gravity.CENTER);
+                    break;
+                case "Liquids":
+                    frames.get(i).setImageResource(R.drawable.liquids);
+                    text.get(i).setText(food_list.get(i).getName());
+                    text.get(i).setGravity(Gravity.CENTER);
+                    break;
+                default:
+                    frames.get(i).setImageResource(R.drawable.dairy);
+                    text.get(i).setText(food_list.get(i).getName());
+                    text.get(i).setGravity(Gravity.CENTER);
+                    break;
             }
 
-            if(food_list.get(i).spoilsToday(cal)){
-                text.get(i).setTextColor(Color.rgb(226, 29, 29));
-            }else if(food_list.get(i).alreadySpoiled(cal)){
+            if (food_list.get(i).spoilsToday(cal)) {
                 text.get(i).setTextColor(Color.rgb(255, 255, 0));
+
+            } else if (food_list.get(i).alreadySpoiled(cal)) {
+                if (food_list.get(i).spoilsToday(cal)) {
+                    text.get(i).setTextColor(Color.rgb(226, 29, 29));
+                } else if (food_list.get(i).alreadySpoiled(cal)) {
+                    text.get(i).setTextColor(Color.rgb(255, 255, 0));
+                }
             }
         }
-        for(int i=food_list.size(); i<16; i++){
+        for (int i = food_list.size(); i < 16; i++) {
             frames.get(i).setImageResource(R.drawable.empty);
             text.get(i).setText("");
         }
     }
 }
+
