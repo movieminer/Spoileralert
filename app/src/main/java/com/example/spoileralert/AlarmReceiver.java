@@ -9,6 +9,7 @@ import android.app.TaskStackBuilder;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 
 import static android.app.NotificationManager.IMPORTANCE_DEFAULT;
@@ -39,28 +40,23 @@ public class AlarmReceiver extends BroadcastReceiver{
                 .setContentIntent(pendingIntent).build();
 
 
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            builder.setChannelId(CHANNEL_ID);
-        }
+        builder.setChannelId(CHANNEL_ID);
 
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel(
-                    CHANNEL_ID,
-                    "Spoil Alert",
-                    NotificationManager.IMPORTANCE_HIGH
-            );
-            channel.enableVibration(true);
-            channel.enableLights(true);
-            channel.setLockscreenVisibility(1);
-            channel.setLightColor(3);
+        NotificationChannel channel = new NotificationChannel(
+                CHANNEL_ID,
+                "Spoil Alert",
+                NotificationManager.IMPORTANCE_HIGH
+        );
+        channel.enableVibration(true);
+        channel.enableLights(true);
+        channel.setLightColor(Color.MAGENTA);
+        channel.setLockscreenVisibility(1);
+        channel.setLightColor(3);
 
 
-
-            notificationManager.createNotificationChannel(channel);
-        }
+        notificationManager.createNotificationChannel(channel);
 
         notificationManager.notify(0, notification);
     }
