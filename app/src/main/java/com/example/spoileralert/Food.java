@@ -12,7 +12,7 @@ import java.net.URL;
 import java.util.Calendar;
 import java.util.Random;
 
-public class Food {
+public class Food implements Comparable<Food> {
 
     private int quantity;
     private final String name;
@@ -93,5 +93,10 @@ public class Food {
 
     public int getQuantity() {
         return quantity;
+    }
+
+    @Override
+    public int compareTo(Food food) {
+        return (getSpoil().compareTo(food.getSpoil()));
     }
 }
