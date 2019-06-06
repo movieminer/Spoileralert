@@ -1,8 +1,11 @@
 package com.example.spoileralert;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -40,5 +43,20 @@ public class PopActivity extends AppCompatActivity {
         TextView expDate = findViewById(R.id.exp_date_pop);
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         expDate.setText(sdf.format(foo.getSpoil().getTime()));
+
+        FloatingActionButton delete_button = findViewById(R.id.remove_button);
+
+        delete_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.removefood(index);
+                openActivityMain();
+            }
+        });
+    }
+
+    private void openActivityMain() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 }

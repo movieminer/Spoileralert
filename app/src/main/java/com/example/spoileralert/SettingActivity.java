@@ -38,43 +38,41 @@ public class SettingActivity extends AppCompatActivity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_settings);
         view = findViewById(R.id.time_view);
-        context=this;
+        context = this;
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-            Calendar cal = Calendar.getInstance();
-            int hour = cal.get(Calendar.HOUR_OF_DAY);
-            int minute = cal.get(Calendar.MINUTE);
-            TimePickerDialog TimePicker;
-            TimePicker =new TimePickerDialog(context, new TimePickerDialog.OnTimeSetListener() {
-                @Override
-                public void onTimeSet (TimePicker timePicker, int selectedHour, int selectedMinute){
+                Calendar cal = Calendar.getInstance();
+                int hour = cal.get(Calendar.HOUR_OF_DAY);
+                int minute = cal.get(Calendar.MINUTE);
+                TimePickerDialog TimePicker;
+                TimePicker = new TimePickerDialog(context, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
 
-                    String hour;
-                    String minute;
+                        String hour;
+                        String minute;
 
-                    if(selectedHour<10) {
-                        hour = "0" + selectedHour;
-                        if (selectedMinute < 10) {
-                            minute = "0" + selectedMinute;
-                        }
-                        else{
-                            minute= String.valueOf(selectedMinute);
-                        }
-                    }
-                    else {
-                        hour = String.valueOf(selectedHour);
+                        if (selectedHour < 10) {
+                            hour = "0" + selectedHour;
+                            if (selectedMinute < 10) {
+                                minute = "0" + selectedMinute;
+                            } else {
+                                minute = String.valueOf(selectedMinute);
+                            }
+                        } else {
+                            hour = String.valueOf(selectedHour);
                             if (selectedMinute < 10) {
                                 minute = "0" + selectedMinute;
                             } else {
                                 minute = String.valueOf(selectedMinute);
                             }
                         }
-                    view.setText(hour + ":" + minute);
-                }
-            },hour,minute,true);//Yes 24 hour time
+                        view.setText(hour + ":" + minute);
+                    }
+                }, hour, minute, true);//Yes 24 hour time
                 TimePicker.setTitle("Select Time");
                 TimePicker.show();
             }
@@ -96,7 +94,7 @@ public class SettingActivity extends AppCompatActivity {
         updateViews();
     }
 
-    public void saveData(){
+    public void saveData() {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(TEXT, view.getText().toString());
@@ -107,13 +105,13 @@ public class SettingActivity extends AppCompatActivity {
         Toast.makeText(this, "Settings saved successfully", Toast.LENGTH_SHORT).show();
     }
 
-    public void loadData(){
+    public void loadData() {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         time = sharedPreferences.getString(TEXT, "15:00");
         switchOnOff = sharedPreferences.getBoolean(SWITCH, true);
     }
 
-    public void updateViews(){
+    public void updateViews() {
         view.setText(time);
         toggle.setChecked(switchOnOff);
     }
