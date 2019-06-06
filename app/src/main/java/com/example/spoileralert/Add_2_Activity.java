@@ -100,7 +100,7 @@ public class Add_2_Activity extends AppCompatActivity {
             startActivity(intent);
         }
         else {
-            Toast.makeText(context, "YO man, this product is already SPOILED!!!", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "YO man, this product already SPOILED!!!", Toast.LENGTH_LONG).show();
         }
     }
 
