@@ -29,6 +29,7 @@
             </intent-filter>
         </receiver>
         <activity android:name=".SettingActivity" />
+        <activity android:name=".PopActivity" android:theme="@style/AppTheme.CustomTheme"/>
     </application>
 
 </manifest>
