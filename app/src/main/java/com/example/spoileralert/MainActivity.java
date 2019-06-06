@@ -22,6 +22,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -35,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
     private static LinkedList<Food> food_list =new LinkedList<>();
     private ArrayList<TextView> text= new ArrayList<>();
     private ArrayList<ImageView> frames = new ArrayList<>();
+    private static final String KEY = "food_list";
+    private static Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +45,14 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
+        context = this;
+        try {
+            food_list = (LinkedList<Food>) InternalStorage.readObject(this, KEY);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
 
         getFrameArr();
         getTextArr();
@@ -81,6 +92,11 @@ public class MainActivity extends AppCompatActivity {
         cal.add(Calendar.SECOND, 15);
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), broadcast);
     }
+    /*
+    @Override
+    protected void onPause(){
+        super.onPause();
+    }*/
 
 
 
@@ -109,6 +125,12 @@ public class MainActivity extends AppCompatActivity {
 
     public static void add_food(Food f){
             food_list.add(f);
+        try {
+            InternalStorage.writeObject(context, KEY, food_list);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     private void createListeners(){
