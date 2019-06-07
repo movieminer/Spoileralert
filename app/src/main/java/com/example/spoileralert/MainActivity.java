@@ -1,6 +1,7 @@
 package com.example.spoileralert;
 
 
+import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -31,6 +32,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.Objects;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -42,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<TextView> text= new ArrayList<>();
     private ArrayList<ImageView> frames = new ArrayList<>();
     private static final String KEY = "food_list";
+    @SuppressLint("StaticFieldLeak")
     private static Context context;
 
     @Override
@@ -98,8 +101,8 @@ public class MainActivity extends AppCompatActivity {
             int min = 0;
 
             if(time != null) {
-                hour = Integer.parseInt(sharedPreferences.getString(TEXT, "15:00").substring(0, 2));
-                min = Integer.parseInt(sharedPreferences.getString(TEXT, "15:00").substring(3, 5));
+                hour = Integer.parseInt(Objects.requireNonNull(sharedPreferences.getString(TEXT, "15:00")).substring(0, 2));
+                min = Integer.parseInt(Objects.requireNonNull(sharedPreferences.getString(TEXT, "15:00")).substring(3, 5));
             }
             Calendar cal = Calendar.getInstance();
             cal.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH), hour, min);
@@ -253,13 +256,8 @@ public class MainActivity extends AppCompatActivity {
 
             if (food_list.get(i).spoilsToday(cal)) {
                 text.get(i).setTextColor(Color.rgb(255, 255, 0));
-
             } else if (food_list.get(i).alreadySpoiled(cal)) {
-                if (food_list.get(i).spoilsToday(cal)) {
-                    text.get(i).setTextColor(Color.rgb(226, 29, 29));
-                } else if (food_list.get(i).alreadySpoiled(cal)) {
-                    text.get(i).setTextColor(Color.rgb(255, 255, 0));
-                }
+                text.get(i).setTextColor(Color.rgb(255, 0, 0));
             }
         }
         if(food_list.size()<16){
