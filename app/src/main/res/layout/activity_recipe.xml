@@ -35,6 +35,8 @@
         android:id="@+id/url_place"
         android:layout_width="341dp"
         android:layout_height="26dp"
+        android:autoLink="all"
+        android:textColorLink="#FFFFFF"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -51,9 +53,13 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="300dp"
         android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/url_place"
+        app:layout_constraintVertical_bias="0.046"
         app:srcCompat="@android:drawable/ic_menu_rotate" />
 </android.support.constraint.ConstraintLayout>
