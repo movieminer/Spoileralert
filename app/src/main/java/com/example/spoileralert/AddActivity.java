@@ -83,6 +83,7 @@ public class AddActivity extends AppCompatActivity {
         intent.putExtra("name", name);
         intent.putExtra("category", category);
         startActivity(intent);
+        this.finish();
 
     }
 

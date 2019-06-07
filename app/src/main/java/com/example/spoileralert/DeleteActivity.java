@@ -64,6 +64,6 @@ public class DeleteActivity extends AppCompatActivity {
     private void openActivityMain() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
-        finish();
+        this.finish();
     }
 }

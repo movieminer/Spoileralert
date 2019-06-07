@@ -119,5 +119,6 @@ public class SettingActivity extends AppCompatActivity {
     public void openActivityBack() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+        this.finish();
     }
 }

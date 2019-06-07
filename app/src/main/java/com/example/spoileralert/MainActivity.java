@@ -16,7 +16,6 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -105,7 +104,6 @@ public class MainActivity extends AppCompatActivity {
             Calendar cal = Calendar.getInstance();
             cal.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH), hour, min);
 
-
             AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 
             Intent notificationIntent = new Intent(this, AlarmReceiver.class);
@@ -113,11 +111,6 @@ public class MainActivity extends AppCompatActivity {
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), broadcast);
         }
     }
-    /*
-    @Override
-    protected void onPause(){
-        super.onPause();
-    }*/
 
     private void openActivityADD() {
         Intent intent = new Intent(this, AddActivity.class);
@@ -140,11 +133,14 @@ public class MainActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     private void createListeners(){
-        for(int i=0; i<food_list.size();i++){
+        int size=16;
+        if(food_list.size()<16){
+            size=food_list.size();
+        }
+        for(int i=0; i<size;i++){
             final int finalI = i;
             frames.get(i).setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -227,7 +223,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void show_food() {
         Calendar cal = Calendar.getInstance();
-        for (int i = 0; i < food_list.size(); i++) {
+        int size=16;
+        if(food_list.size()<16){
+            size=food_list.size();
+        }
+        for (int i = 0; i < size; i++) {
             switch (food_list.get(i).getCategory()) {
                 case "Meat":
                     frames.get(i).setImageResource(R.drawable.meat);
@@ -262,9 +262,11 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
+        if(food_list.size()<16){
         for (int i = food_list.size(); i < 16; i++) {
             frames.get(i).setImageResource(R.drawable.empty);
             text.get(i).setText("");
+        }
         }
     }
 }

@@ -69,7 +69,6 @@ public class Add_2_Activity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
                 new DatePickerDialog(context, date, cldr
                         .get(Calendar.YEAR), cldr.get(Calendar.MONTH),
                         cldr.get(Calendar.DAY_OF_MONTH)).show();
@@ -98,6 +97,7 @@ public class Add_2_Activity extends AppCompatActivity {
             intent.putExtra("quantity", quantity);
             intent.putExtra("category", category);
             startActivity(intent);
+            this.finish();
         }
         else {
             Toast.makeText(context, "YO man, this product already SPOILED!!!", Toast.LENGTH_LONG).show();
