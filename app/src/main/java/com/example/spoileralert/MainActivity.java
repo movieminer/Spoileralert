@@ -37,6 +37,8 @@ import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
+    //all of the variables that are needed including lists and constants we use in the functions.
+
     public static final String SHARED_PREFS = "sharedPrefs";
     public static final String TEXT = "text";
     public static final String SWITCH = "switch";
@@ -46,6 +48,9 @@ public class MainActivity extends AppCompatActivity {
     private static final String KEY = "food_list";
     @SuppressLint("StaticFieldLeak")
     private static Context context;
+
+    //in the onCreate() we first try to retrive data from storage and then sort the list,
+    // we then makes sure all of the articles are shown including the names.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,14 +77,14 @@ public class MainActivity extends AppCompatActivity {
         getTextArr();
 
         FloatingActionButton add_button = findViewById(R.id.add_button);
-
+        // the listener for the settings add button.
         add_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openActivityADD();
             }
         });
-
+        //the listener for the settings button.
         FloatingActionButton setting_button = findViewById(R.id.setting_button);
         setting_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,6 +98,8 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         boolean switchOnOff = sharedPreferences.getBoolean(SWITCH, true);
+
+        // checks for the settings in the preferences and the notifications are null which it then should use its default settings.
 
         if(switchOnOff) {
             String time = sharedPreferences.getString(TEXT, "15:00");
@@ -115,20 +122,26 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //function to open the add activity to be used in the listener.
+
     private void openActivityADD() {
         Intent intent = new Intent(this, AddActivity.class);
         startActivity(intent);
     }
+
+    //the same as add but for the settings listener.
     private void openActivitySet() {
         Intent intent = new Intent(this, SettingActivity.class);
         startActivity(intent);
     }
+
+    // function to open the popup menu after clicking an item in the fridge.
     private void openActivityPop(int i){
         Intent intent = new Intent(this, PopActivity.class);
         intent.putExtra("index",i);
         startActivity(intent);
     }
-
+    // adds an item to the list of food, and tries to save the list to memory.
     public static void add_food(Food f){
             food_list.add(f);
         try {
@@ -167,6 +180,8 @@ public class MainActivity extends AppCompatActivity {
         return food_list;
     }
 
+    // retrieves the image views to be changed from the given layout.
+
     private void getFrameArr(){
         TableLayout tl = findViewById(R.id.FoodLayout);
 
@@ -195,6 +210,8 @@ public class MainActivity extends AppCompatActivity {
             frames.add(iv);
         }
     }
+
+    // retrieves the text views to be altered.
     private void getTextArr(){
         TableLayout tl = findViewById(R.id.FoodLayout);
 
@@ -223,6 +240,8 @@ public class MainActivity extends AppCompatActivity {
             text.add(tv);
         }
     }
+
+    // shows the food in the fridge using the lists with the corresponding views.
 
     public void show_food() {
         Calendar cal = Calendar.getInstance();
