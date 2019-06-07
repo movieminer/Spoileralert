@@ -28,11 +28,15 @@ import javax.net.ssl.HttpsURLConnection;
 
 import static android.content.ContentValues.TAG;
 
+//class that handles the connection to the internet and thus the API requests
+
 public class API {
 
     InputStream is = null;
     JSONObject jObj = null;
     String json = "";
+
+    //gets the API request for the recipe and return a json file
 
     public JSONObject getJSONFromUrl(String url) {
 
@@ -77,6 +81,8 @@ public class API {
         // return JSON String
         return jObj;
     }
+
+    //gets the picture of the recipe and returns it
 
     public Bitmap getPicFromUrl(String url) {
         InputStream stream = null;

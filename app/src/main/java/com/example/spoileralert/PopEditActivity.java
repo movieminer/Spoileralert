@@ -29,6 +29,9 @@ public class PopEditActivity extends AppCompatActivity {
     private String date_product;
     private String quantity;
 
+    //creates the an edit pop up activity that lets you edit the quantity and the expire date
+    //if the expire date is not selected it will use the old one
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -17,6 +17,8 @@ public class PopActivity extends AppCompatActivity {
     private int index;
     private Food foo;
 
+    //creates a pop up to edit, delete or get a recipe from the selected product
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

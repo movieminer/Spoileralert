@@ -151,6 +151,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //creates the listeners for the imageviews filled with products
+
     private void createListeners(){
         int size=16;
         if(food_list.size()<16){

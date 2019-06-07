@@ -115,10 +115,4 @@ public class SettingActivity extends AppCompatActivity {
         view.setText(time);
         toggle.setChecked(switchOnOff);
     }
-
-    public void openActivityBack() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-        this.finish();
-    }
 }

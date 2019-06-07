@@ -42,6 +42,7 @@ public class Add_3_Activity extends AppCompatActivity {
         });
     }
 
+    //Adds the newly created food to the list, creates a new main activity and closes the add activity
     private void openActivityADD() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         Calendar cal = Calendar.getInstance();

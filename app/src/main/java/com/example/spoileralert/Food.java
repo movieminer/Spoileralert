@@ -38,8 +38,9 @@ public class Food implements Serializable, Comparable<Food> {
         this.spoil = spoil;
     }
 
-    public JSONObject getThread(){
+    //creates a thread to do the API request and returns a json file
 
+    public JSONObject getThread(){
         url_recipe_name = name.replaceAll(" ", "%20");
         final JSONObject[] jay_son = new JSONObject[1];
         final Random rand = new Random();
@@ -69,7 +70,6 @@ public class Food implements Serializable, Comparable<Food> {
     }
 
     //returns true if the items spoils on the current day.
-
     boolean spoilsToday(Calendar currentDate){
         return (currentDate.get(Calendar.DAY_OF_MONTH)== spoil.get(Calendar.DAY_OF_MONTH) &&
                 currentDate.get(Calendar.MONTH) == spoil.get(Calendar.MONTH) &&
