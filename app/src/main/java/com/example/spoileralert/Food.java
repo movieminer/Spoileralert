@@ -19,6 +19,8 @@ import java.nio.charset.Charset;
 import java.util.Calendar;
 import java.util.Random;
 
+// this classes represents a food item which has all details like the iten name and amount.
+
 public class Food implements Serializable, Comparable<Food> {
 
     private int quantity;
@@ -66,12 +68,14 @@ public class Food implements Serializable, Comparable<Food> {
         return sb.toString();
     }
 
+    //returns true if the items spoils on the current day.
+
     boolean spoilsToday(Calendar currentDate){
         return (currentDate.get(Calendar.DAY_OF_MONTH)== spoil.get(Calendar.DAY_OF_MONTH) &&
                 currentDate.get(Calendar.MONTH) == spoil.get(Calendar.MONTH) &&
                 currentDate.get(Calendar.YEAR) == spoil.get(Calendar.YEAR));
     }
-
+    // returns if the item is already spoiled.
     boolean alreadySpoiled(Calendar currentDate){
 
         if(currentDate.get(Calendar.YEAR) > spoil.get(Calendar.YEAR)){
@@ -110,6 +114,6 @@ public class Food implements Serializable, Comparable<Food> {
 
     @Override
     public int compareTo(Food food) {
-        return (getSpoil().compareTo(food.getSpoil()));
+        return (this.getSpoil().compareTo(food.getSpoil()));
     }
 }

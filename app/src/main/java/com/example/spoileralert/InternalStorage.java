@@ -12,7 +12,11 @@ import java.nio.file.DirectoryStream;
 
 public final class InternalStorage{
 
+    //functions to write and read from storage.
+
     private InternalStorage() {}
+
+    //this function writes an object from memory using a key and objectStream, the key makes sure we can retrieve the needed data.
 
     public static void writeObject(Context context, String key, Object object) throws IOException {
         FileOutputStream fos = context.openFileOutput(key, Context.MODE_PRIVATE);
@@ -21,6 +25,8 @@ public final class InternalStorage{
         oos.close();
         fos.close();
     }
+
+    //this functions reads from memory using the same paramters as the write but it also has an object to read to.
 
     public static Object readObject(Context context, String key) throws IOException, ClassNotFoundException {
         FileInputStream fis = context.openFileInput(key);
