@@ -87,5 +87,6 @@ public class PopActivity extends AppCompatActivity {
         Intent intent = new Intent(this, PopEditActivity.class);
         intent.putExtra("index", index);
         startActivity(intent);
+        this.finish();
     }
 }

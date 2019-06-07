@@ -91,7 +91,6 @@ public class PopEditActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
                 new DatePickerDialog(context, date, cldr
                         .get(Calendar.YEAR), cldr.get(Calendar.MONTH),
                         cldr.get(Calendar.DAY_OF_MONTH)).show();
@@ -114,6 +113,7 @@ public class PopEditActivity extends AppCompatActivity {
             }
         });
     }
+
     private void openActivitySAVE() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         Calendar cal = Calendar.getInstance();
@@ -126,6 +126,7 @@ public class PopEditActivity extends AppCompatActivity {
         MainActivity.removefood(index);
         MainActivity.add_food(new Food(Integer.parseInt(quantity), foo.getCategory(), foo.getName(), cal));
         startActivity(intent);
+        this.finish();
     }
 
     private void updateLabel() {

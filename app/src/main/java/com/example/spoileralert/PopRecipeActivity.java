@@ -1,5 +1,6 @@
 package com.example.spoileralert;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -13,6 +14,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,6 +27,7 @@ import java.util.Random;
 public class PopRecipeActivity extends AppCompatActivity {
 
     private int index;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,7 @@ public class PopRecipeActivity extends AppCompatActivity {
 
         int width = dm.widthPixels;
         int height = dm.heightPixels;
+        context=this;
 
         getWindow().setLayout((int) (width * .8), (int) (height * .6));
         index = getIntent().getIntExtra("index",0);
@@ -55,60 +59,63 @@ public class PopRecipeActivity extends AppCompatActivity {
         Food foo = MainActivity.getFood_list().get(index);
 
         JSONObject arr = foo.getThread();
-        JSONArray recipes=null;
-        try {
-            recipes = arr.getJSONArray("recipes");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        JSONObject object = null;
-        final Random rand = new Random();
-        try {
-            object = recipes.getJSONObject(rand.nextInt(10));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        final TextView name = findViewById(R.id.recipe_place);
-        try {
-            name.setText(object.getString("title"));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        name.setGravity(Gravity.CENTER);
-
-        TextView url = findViewById(R.id.url_place);
-        try {
-            url.setText(object.getString("source_url"));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        url.setGravity(Gravity.CENTER);
-
-        String imgURL = null;
-        try {
-            imgURL = object.getString("image_url");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        final ImageView food = findViewById(R.id.recipe_view);
-        final String finalImgURL1 = imgURL;
-        final Bitmap[] bit = new Bitmap[1];
-        Thread t1 = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                API api =new API();
-                bit[0] = api.getPicFromUrl(finalImgURL1);
+            JSONArray recipes = null;
+            try {
+                recipes = arr.getJSONArray("recipes");
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-        });
-        t1.start();
-        try {
-            t1.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        food.setImageBitmap(bit[0]);
-    }
+            JSONObject object = null;
+            final Random rand = new Random();
+            try {
+                object = recipes.getJSONObject(rand.nextInt(10));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            final TextView name = findViewById(R.id.recipe_place);
+        if (object==null) {
+            Toast.makeText(context, "Can't find recipe", Toast.LENGTH_LONG).show();
+            this.finish();
+        }else{
+            try {
+                name.setText(object.getString("title"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            name.setGravity(Gravity.CENTER);
 
+            TextView url = findViewById(R.id.url_place);
+            try {
+                url.setText(object.getString("source_url"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            url.setGravity(Gravity.CENTER);
+
+            String imgURL = null;
+            try {
+                imgURL = object.getString("image_url");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            final ImageView food = findViewById(R.id.recipe_view);
+            final String finalImgURL1 = imgURL;
+            final Bitmap[] bit = new Bitmap[1];
+            Thread t1 = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    API api = new API();
+                    bit[0] = api.getPicFromUrl(finalImgURL1);
+                }
+            });
+            t1.start();
+            try {
+                t1.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            food.setImageBitmap(bit[0]);
+        }
+    }
 }

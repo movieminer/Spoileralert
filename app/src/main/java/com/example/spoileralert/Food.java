@@ -27,8 +27,7 @@ public class Food implements Serializable, Comparable<Food> {
     private final Calendar spoil;
     private String URL = "https://www.food2fork.com/api/search?key=18e03eaa954ff60c4589c9766e5825b1";
 
-    private String recipe_name;
-    private String PicutreURL;
+    private String url_recipe_name;
     private String recipe_url;
     Food(int quantity, String category, String name, Calendar spoil) {
         this.name = name;
@@ -38,13 +37,15 @@ public class Food implements Serializable, Comparable<Food> {
     }
 
     public JSONObject getThread(){
+
+        url_recipe_name = name.replaceAll(" ", "%20");
         final JSONObject[] jay_son = new JSONObject[1];
         final Random rand = new Random();
         final API api = new API();
         Thread t1 = new Thread(new Runnable() {
             @Override
             public void run() {
-                jay_son[0] = api.getJSONFromUrl(URL+"&q=" + name+"&page="+ rand.nextInt(5));
+                jay_son[0] = api.getJSONFromUrl(URL+"&q=" + url_recipe_name+"&page="+ rand.nextInt(5));
             }
         });
         t1.start();
