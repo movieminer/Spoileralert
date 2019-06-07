@@ -17,6 +17,8 @@ public class AddActivity extends AppCompatActivity {
     private String name= "state";
     private String category="placeholder";
 
+    //requests the first user input, namely the name and catagory
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +80,7 @@ public class AddActivity extends AppCompatActivity {
             }
         });
 }
+    //opens the new add activity and gives the user input along with the intent
     public void openActivityADD() {
         Intent intent = new Intent(this, Add_2_Activity.class);
         intent.putExtra("name", name);
@@ -87,6 +90,7 @@ public class AddActivity extends AppCompatActivity {
 
     }
 
+    //sets array on the second spinner, uses array input to make it so that it relies on the choice of the first spinner
     public void setSpinner2(String[] arr){
 
         final Spinner spinner2 = findViewById(R.id.spinner2);

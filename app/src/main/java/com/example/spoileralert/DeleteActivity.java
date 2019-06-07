@@ -15,6 +15,8 @@ public class DeleteActivity extends AppCompatActivity {
     private int index;
     private Food foo;
 
+    //creates the pop up that requests if you want to delete the product
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +62,8 @@ public class DeleteActivity extends AppCompatActivity {
             }
         });
     }
+
+    //creates a new main activity and closes this activity
 
     private void openActivityMain() {
         Intent intent = new Intent(this, MainActivity.class);

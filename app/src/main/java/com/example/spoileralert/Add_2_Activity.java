@@ -30,6 +30,8 @@ public class Add_2_Activity extends AppCompatActivity {
     private String name;
     private String category;
 
+    //requests the second user input, namely the quantity and the expire date
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -86,6 +88,7 @@ public class Add_2_Activity extends AppCompatActivity {
         });
     }
 
+    //Opens the next activity window but gives the user input to the intent
     public void openActivityADD() {
         if(date == null)
             Toast.makeText(context, "Invalid date", Toast.LENGTH_LONG).show();
@@ -104,7 +107,7 @@ public class Add_2_Activity extends AppCompatActivity {
         }
     }
 
-
+    //updates the date label to the date that the user put in
     private void updateLabel() {
         TextView text = findViewById(R.id.expireDate);
         String myFormat = "dd-MM-yyyy"; //In which you need put here

@@ -55,6 +55,8 @@ public class PopRecipeActivity extends AppCompatActivity {
         });
     }
 
+    //gets a recipe from the API and displays it
+
     public void getRequest(){
         Food foo = MainActivity.getFood_list().get(index);
 
