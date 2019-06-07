@@ -6,60 +6,59 @@
     android:layout_height="match_parent"
     android:background="#E62272">
 
-    <ImageView
-        android:id="@+id/recipe_view"
-        android:layout_width="214dp"
-        android:layout_height="194dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recipe_place"
-        app:srcCompat="@drawable/empty" />
-
-    <TextView
-        android:id="@+id/recipe_place"
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/save_button_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="8dp"
+        android:clickable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/expire_date_holder_edit"
+        app:srcCompat="@android:drawable/ic_menu_save" />
+
+    <TextView
+        android:id="@+id/edit_title_thing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="8dp"
+        android:text="TextView"
         android:textColor="#FFFFFF"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/url_place"
-        android:layout_width="341dp"
-        android:layout_height="26dp"
-        android:autoLink="all"
-        android:textColorLink="#FFFFFF"
+    <Spinner
+        android:id="@+id/quantity_holder"
+        android:layout_width="244dp"
+        android:layout_height="56dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="44dp"
         android:layout_marginEnd="8dp"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
+        android:background="#d61866"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recipe_view" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_title_thing" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/new_one"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <TextView
+        android:id="@+id/expire_date_holder_edit"
+        android:layout_width="250dp"
+        android:layout_height="56dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="44dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="300dp"
-        android:clickable="true"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="#d61866"
+        android:text="@string/spoil_date"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/url_place"
-        app:layout_constraintVertical_bias="0.046"
-        app:srcCompat="@android:drawable/ic_menu_rotate" />
+        app:layout_constraintTop_toBottomOf="@+id/quantity_holder" />
+
 </android.support.constraint.ConstraintLayout>
