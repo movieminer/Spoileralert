@@ -1,6 +1,7 @@
 package com.example.spoileralert;
 
 
+import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -16,7 +17,6 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -32,6 +32,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.Objects;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -39,10 +40,11 @@ public class MainActivity extends AppCompatActivity {
     public static final String SHARED_PREFS = "sharedPrefs";
     public static final String TEXT = "text";
     public static final String SWITCH = "switch";
-    private static LinkedList<Food> food_list =new LinkedList<>();
+    private static ArrayList<Food> food_list =new ArrayList<>();
     private ArrayList<TextView> text= new ArrayList<>();
     private ArrayList<ImageView> frames = new ArrayList<>();
     private static final String KEY = "food_list";
+    @SuppressLint("StaticFieldLeak")
     private static Context context;
 
     @Override
@@ -53,7 +55,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         context = this;
         try {
-            food_list = (LinkedList<Food>) InternalStorage.readObject(this, KEY);
+            food_list = (ArrayList<Food>) InternalStorage.readObject(this, KEY);
+            food_list.sort(new Comparator<Food>() {
+                @Override
+                public int compare(Food o1, Food o2) {
+                    return o1.getSpoil().getTime().compareTo(o2.getSpoil().getTime());
+                }
+            });
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -93,12 +101,11 @@ public class MainActivity extends AppCompatActivity {
             int min = 0;
 
             if(time != null) {
-                hour = Integer.parseInt(sharedPreferences.getString(TEXT, "15:00").substring(0, 2));
-                min = Integer.parseInt(sharedPreferences.getString(TEXT, "15:00").substring(3, 5));
+                hour = Integer.parseInt(Objects.requireNonNull(sharedPreferences.getString(TEXT, "15:00")).substring(0, 2));
+                min = Integer.parseInt(Objects.requireNonNull(sharedPreferences.getString(TEXT, "15:00")).substring(3, 5));
             }
             Calendar cal = Calendar.getInstance();
             cal.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH), hour, min);
-
 
             AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 
@@ -107,14 +114,6 @@ public class MainActivity extends AppCompatActivity {
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), broadcast);
         }
     }
-    /*
-    @Override
-    protected void onPause(){
-        super.onPause();
-    }*/
-
-
-
 
     private void openActivityADD() {
         Intent intent = new Intent(this, AddActivity.class);
@@ -137,11 +136,14 @@ public class MainActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     private void createListeners(){
-        for(int i=0; i<food_list.size();i++){
+        int size=16;
+        if(food_list.size()<16){
+            size=food_list.size();
+        }
+        for(int i=0; i<size;i++){
             final int finalI = i;
             frames.get(i).setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -161,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public static LinkedList<Food> getFood_list() {
+    public static ArrayList<Food> getFood_list() {
         return food_list;
     }
 
@@ -172,7 +174,6 @@ public class MainActivity extends AppCompatActivity {
             ImageView iv;
             TableRow tr = (TableRow) tl.getChildAt(1);
             iv = (ImageView) tr.getChildAt(i);
-            System.out.println(i);
             frames.add(iv);
         }
         for(int i=0; i<4; i++){
@@ -225,7 +226,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void show_food() {
         Calendar cal = Calendar.getInstance();
-        for (int i = 0; i < food_list.size(); i++) {
+        int size=16;
+        if(food_list.size()<16){
+            size=food_list.size();
+        }
+        for (int i = 0; i < size; i++) {
             switch (food_list.get(i).getCategory()) {
                 case "Meat":
                     frames.get(i).setImageResource(R.drawable.meat);
@@ -251,18 +256,15 @@ public class MainActivity extends AppCompatActivity {
 
             if (food_list.get(i).spoilsToday(cal)) {
                 text.get(i).setTextColor(Color.rgb(255, 255, 0));
-
             } else if (food_list.get(i).alreadySpoiled(cal)) {
-                if (food_list.get(i).spoilsToday(cal)) {
-                    text.get(i).setTextColor(Color.rgb(226, 29, 29));
-                } else if (food_list.get(i).alreadySpoiled(cal)) {
-                    text.get(i).setTextColor(Color.rgb(255, 255, 0));
-                }
+                text.get(i).setTextColor(Color.rgb(255, 0, 0));
             }
         }
+        if(food_list.size()<16){
         for (int i = food_list.size(); i < 16; i++) {
             frames.get(i).setImageResource(R.drawable.empty);
             text.get(i).setText("");
+        }
         }
     }
 }

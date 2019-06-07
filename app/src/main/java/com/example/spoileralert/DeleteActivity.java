@@ -1,18 +1,16 @@
 package com.example.spoileralert;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
 
-public class PopActivity extends AppCompatActivity {
+public class DeleteActivity extends AppCompatActivity {
 
     private int index;
     private Food foo;
@@ -20,7 +18,7 @@ public class PopActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pop_up);
+        setContentView(R.layout.activity_delete);
 
         index = getIntent().getIntExtra("index",0);
 
@@ -44,48 +42,27 @@ public class PopActivity extends AppCompatActivity {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         expDate.setText(sdf.format(foo.getSpoil().getTime()));
 
-        FloatingActionButton delete_button = findViewById(R.id.remove_button);
+        FloatingActionButton yes_button = findViewById(R.id.yes_button);
+        FloatingActionButton no_button = findViewById(R.id.no_button);
 
-        delete_button.setOnClickListener(new View.OnClickListener() {
+        yes_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openActivityDelete();
+                MainActivity.removefood(index);
+                openActivityMain();
             }
         });
 
-        FloatingActionButton recipe_button = findViewById(R.id.recipe_button);
-
-        recipe_button.setOnClickListener(new View.OnClickListener() {
+        no_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openActivityRecipe();
-            }
-        });
-
-        FloatingActionButton edit_button = findViewById(R.id.edit_button);
-
-        edit_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openActivityEdit();
+                finish();
             }
         });
     }
 
-    private void openActivityDelete() {
-        Intent intent = new Intent(this, DeleteActivity.class);
-        startActivity(intent);
-    }
-
-    private void openActivityRecipe() {
-        Intent intent = new Intent(this, PopRecipeActivity.class);
-        intent.putExtra("index", index);
-        startActivity(intent);
-    }
-
-    private void openActivityEdit() {
-        Intent intent = new Intent(this, PopEditActivity.class);
-        intent.putExtra("index", index);
+    private void openActivityMain() {
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         this.finish();
     }
