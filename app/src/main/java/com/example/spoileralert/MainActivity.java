@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String SHARED_PREFS = "sharedPrefs";
     public static final String TEXT = "text";
     public static final String SWITCH = "switch";
-    private static LinkedList<Food> food_list =new LinkedList<>();
+    private static ArrayList<Food> food_list =new ArrayList<>();
     private ArrayList<TextView> text= new ArrayList<>();
     private ArrayList<ImageView> frames = new ArrayList<>();
     private static final String KEY = "food_list";
@@ -53,7 +53,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         context = this;
         try {
-            food_list = (LinkedList<Food>) InternalStorage.readObject(this, KEY);
+            food_list = (ArrayList<Food>) InternalStorage.readObject(this, KEY);
+            food_list.sort(new Comparator<Food>() {
+                @Override
+                public int compare(Food o1, Food o2) {
+                    return o1.getSpoil().getTime().compareTo(o2.getSpoil().getTime());
+                }
+            });
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -113,9 +119,6 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
     }*/
 
-
-
-
     private void openActivityADD() {
         Intent intent = new Intent(this, AddActivity.class);
         startActivity(intent);
@@ -161,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public static LinkedList<Food> getFood_list() {
+    public static ArrayList<Food> getFood_list() {
         return food_list;
     }
 

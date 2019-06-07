@@ -22,7 +22,7 @@ public class SpoilsNotification {
     public SpoilsNotification(){
     }
 
-    public static String spoiledFoodDisplayMessage(LinkedList<Food> currentFoods){
+    public static String spoiledFoodDisplayMessage(ArrayList<Food> currentFoods){
         int spoiled=0;
         Date currentTime = new java.util.Date();
         Calendar currentDate = Calendar.getInstance();
