@@ -62,6 +62,14 @@ public class PopActivity extends AppCompatActivity {
             }
         });
 
+        FloatingActionButton edit_button = findViewById(R.id.edit_button);
+
+        edit_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openActivityEdit();
+            }
+        });
     }
 
     private void openActivityDelete() {
@@ -71,6 +79,12 @@ public class PopActivity extends AppCompatActivity {
 
     private void openActivityRecipe() {
         Intent intent = new Intent(this, PopRecipeActivity.class);
+        intent.putExtra("index", index);
+        startActivity(intent);
+    }
+
+    private void openActivityEdit() {
+        Intent intent = new Intent(this, PopEditActivity.class);
         intent.putExtra("index", index);
         startActivity(intent);
     }

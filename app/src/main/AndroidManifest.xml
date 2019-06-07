@@ -42,6 +42,9 @@
         <activity
             android:name=".DeleteActivity"
             android:theme="@style/AppTheme.CustomTheme" />
+        <activity
+            android:name=".PopEditActivity"
+            android:theme="@style/AppTheme.CustomTheme" />
     </application>
 
 </manifest>
